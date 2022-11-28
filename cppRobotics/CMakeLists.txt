@@ -1,21 +1,29 @@
 cmake_minimum_required(VERSION 3.7 FATAL_ERROR)
 
-project(native_add_library VERSION 1.0.0 LANGUAGES CXX)
+project(CppRobotics VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_library(native_add_library SHARED
-  native_add.cpp
+set(CPP_ROBOTICS_SRCS
+	src/native_add.cpp
+)
+
+add_library(cpp_robotics_library SHARED
+  ${CPP_ROBOTICS_SRCS}
   native_add.def
 )
 
-add_executable(native_add_test
-  native_add.cpp
+add_executable(cpp_robotics_test
+  src/main.cpp
 )
 
-set_target_properties(native_add_library PROPERTIES
+target_link_libraries(cpp_robotics_test
+cpp_robotics_library
+)
+
+set_target_properties(cpp_robotics_library PROPERTIES
     PUBLIC_HEADER native_add.h
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
