@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/weebee/temp/native_add/example/android/app/.cxx/Debug/6a4c4d1o/x86",
+  "command": "/home/weebee/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=i686-none-linux-android16 --gcc-toolchain=/home/weebee/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/weebee/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIE -std=c++14 -o CMakeFiles/cpp_robotics_test.dir/src/main.cpp.o -c /home/weebee/temp/native_add/cppRobotics/src/main.cpp",
+  "file": "/home/weebee/temp/native_add/cppRobotics/src/main.cpp"
+},
+{
+  "directory": "/home/weebee/temp/native_add/example/android/app/.cxx/Debug/6a4c4d1o/x86",
+  "command": "/home/weebee/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=i686-none-linux-android16 --gcc-toolchain=/home/weebee/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/weebee/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dcpp_robotics_library_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC -std=c++14 -o CMakeFiles/cpp_robotics_library.dir/src/native_add.cpp.o -c /home/weebee/temp/native_add/cppRobotics/src/native_add.cpp",
+  "file": "/home/weebee/temp/native_add/cppRobotics/src/native_add.cpp"
+}
+]

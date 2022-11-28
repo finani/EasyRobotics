@@ -1,0 +1,68 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "CppRobotics",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "cpp_robotics_library::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cpp_robotics_library-Debug-2ec18a424ef3ba8822b9.json",
+					"name" : "cpp_robotics_library",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cpp_robotics_test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cpp_robotics_test-Debug-f31de3a116e9717bd7a0.json",
+					"name" : "cpp_robotics_test",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/weebee/temp/native_add/example/android/app/.cxx/Debug/6a4c4d1o/x86_64",
+		"source" : "/home/weebee/temp/native_add/cppRobotics"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 1
+	}
+}

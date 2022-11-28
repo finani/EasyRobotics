@@ -1,0 +1,4 @@
+/home/weebee/temp/native_add/example/android/app/.cxx/Debug/6a4c4d1o/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/home/weebee/temp/native_add/example/android/app/.cxx/Debug/6a4c4d1o/arm64-v8a/CMakeFiles/cpp_robotics_test.dir
+/home/weebee/temp/native_add/example/android/app/.cxx/Debug/6a4c4d1o/arm64-v8a/CMakeFiles/edit_cache.dir
+/home/weebee/temp/native_add/example/android/app/.cxx/Debug/6a4c4d1o/arm64-v8a/CMakeFiles/cpp_robotics_library.dir
