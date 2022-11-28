@@ -1,0 +1,3 @@
+LIBRARY   native_add
+EXPORTS
+   nativeAdd

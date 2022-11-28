@@ -18,6 +18,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  path: ^1.8.0
+
   native_add:
     # When depending on this package from a real application you should use:
     #   native_add: ^x.y.z
