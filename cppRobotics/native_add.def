@@ -1,3 +1,3 @@
 LIBRARY   native_add
 EXPORTS
-   nativeAdd
+   native_add
