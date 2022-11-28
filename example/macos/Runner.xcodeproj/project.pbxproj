@@ -27,7 +27,7 @@
 		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
-		4EA5BF7E29303D0200BB470D /* native_add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA5BF7D29303D0200BB470D /* native_add.cpp */; };
+		4EE019A0293452040006FF27 /* native_add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0199F293452040006FF27 /* native_add.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,8 @@
 		33E51913231747F40026EE4D /* DebugProfile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugProfile.entitlements; sourceTree = "<group>"; };
 		33E51914231749380026EE4D /* Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
-		4EA5BF7D29303D0200BB470D /* native_add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = native_add.cpp; path = ../../../cppRobotics/native_add.cpp; sourceTree = "<group>"; };
+		4EE0199F293452040006FF27 /* native_add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = native_add.cpp; path = ../../../../cppRobotics/src/native_add.cpp; sourceTree = "<group>"; };
+		4EE019A12934520F0006FF27 /* native_add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = native_add.h; path = ../../../../cppRobotics/src/native_add.h; sourceTree = "<group>"; };
 		5A9F62E2170FE00E02F601B8 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		6652E0417850301CC7577801 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -158,9 +159,18 @@
 		4EA5BF7C29303CAE00BB470D /* cppRobotics */ = {
 			isa = PBXGroup;
 			children = (
-				4EA5BF7D29303D0200BB470D /* native_add.cpp */,
+				4EE0199E293451EB0006FF27 /* src */,
 			);
 			path = cppRobotics;
+			sourceTree = "<group>";
+		};
+		4EE0199E293451EB0006FF27 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4EE019A12934520F0006FF27 /* native_add.h */,
+				4EE0199F293452040006FF27 /* native_add.cpp */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		B7314BC0538BD578E05FE2EF /* Pods */ = {
@@ -349,7 +359,7 @@
 			files = (
 				33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */,
 				33CC10F12044A3C60003C045 /* AppDelegate.swift in Sources */,
-				4EA5BF7E29303D0200BB470D /* native_add.cpp in Sources */,
+				4EE019A0293452040006FF27 /* native_add.cpp in Sources */,
 				335BBD1B22A9A15E00E9071D /* GeneratedPluginRegistrant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
