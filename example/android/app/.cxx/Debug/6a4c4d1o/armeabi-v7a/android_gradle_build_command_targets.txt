@@ -1,8 +1,0 @@
-Executable : /home/weebee/Android/Sdk/cmake/3.18.1/bin/ninja
-arguments : 
--C
-/home/weebee/temp/native_add/example/android/app/.cxx/Debug/6a4c4d1o/armeabi-v7a
-cpp_robotics_library
-cpp_robotics_test
-jvmArgs : 
-

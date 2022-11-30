@@ -1,5 +1,0 @@
-# ninja log v5
-0	12	1669600713	CMakeFiles/cpp_robotics_test.dir/src/main.cpp.o	6a348abb05ff9707
-0	12	1669600713	CMakeFiles/cpp_robotics_library.dir/src/native_add.cpp.o	f646b8ca088b2441
-12	158	1669600713	/home/weebee/temp/native_add/example/build/app/intermediates/cxx/Debug/6a4c4d1o/obj/armeabi-v7a/libnative_add.so	576f0d3f0e8140d2
-159	171	1669600713	/home/weebee/temp/native_add/example/build/app/intermediates/cxx/Debug/6a4c4d1o/obj/armeabi-v7a/cpp_robotics_test	246536cfa62ad32a
