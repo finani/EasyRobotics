@@ -1,0 +1,134 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_android:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+#       - name: Download Android keystore
+#         id: android_keystore
+#         uses: timheuer/base64-to-file@v1.0.3
+#         with:
+#           fileName: key.jks
+#           encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+#       - name: Create key.properties
+#         run: |
+#           echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+#           echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
+#           echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
+#           echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties          
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Flutter Test
+        run: flutter test
+      - name: Build APK
+        run: |
+          cd example
+          flutter build apk # --release
+      - name: Rename APK
+        run: |
+          mv example/build/app/outputs/flutter-apk/app-release.apk ./ExampleApp-SNAPSHOT.apk
+      - name: Archive APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-build
+          path: ./ExampleApp-SNAPSHOT.apk
+
+  build_ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          architecture: x64
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Flutter Test
+        run: flutter test
+      - name: Build IOS
+        run:  |
+          cd example
+          flutter build ios --no-codesign --release
+#       - name: Export IPA
+#         run: |
+#           cd example/ios
+#           xcodebuild -allowProvisioningUpdates -workspace Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Release archive -archivePath $PWD/build/Runner.xcarchive
+#           xcodebuild -exportArchive -archivePath $PWD/build/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath $PWD/build/Runner.ipa
+#       - name: Rename IPA
+#         run: |
+#           cd ../..
+#           mv example/ios/build/Runner.ipa/Runner.ipa ./ExampleApp-SNAPSHOT.ipa
+#       - name: Archive IPA
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: ios-build
+#           path: ./ExampleApp-SNAPSHOT.ipa
+      - name: Archive IOS
+        uses: actions/upload-artifact@v3
+        with:
+          name: ios-build
+          path: example/build/ios/iphoneos
+
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: flutter config --enable-windows-desktop
+      - name: Build Windows
+        run:  |
+          cd example
+          flutter build windows
+
+  build_linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+         sudo apt-get update -y
+         sudo apt-get install -y ninja-build libgtk-3-dev
+      - run: flutter config --enable-linux-desktop
+      - name: Build Linux
+        run:  |
+          cd example
+          flutter build linux
+
+  build_macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          architecture: x64
+      - run: flutter config --enable-macos-desktop
+      - name: Build MacOS
+        run:  |
+          cd example
+          flutter build macos
