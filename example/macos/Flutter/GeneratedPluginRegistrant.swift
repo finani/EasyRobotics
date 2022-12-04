@@ -5,7 +5,7 @@
 import FlutterMacOS
 import Foundation
 
-import native_add
+import native_cpp
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   NativeAddPlugin.register(with: registry.registrar(forPlugin: "NativeAddPlugin"))
