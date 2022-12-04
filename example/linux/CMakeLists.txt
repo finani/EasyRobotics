@@ -1,10 +1,10 @@
 # Project-level configuration.
-cmake_minimum_required(VERSION 3.10)
-project(runner LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.14)
+project(easy_robotics LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-set(BINARY_NAME "native_add_example")
+set(BINARY_NAME "easy-robotics")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
 set(APPLICATION_ID "com.example.native_cpp")
