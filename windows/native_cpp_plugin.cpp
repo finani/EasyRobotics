@@ -20,7 +20,7 @@ void NativeCppPlugin::RegisterWithRegistrar(
     flutter::PluginRegistrarWindows *registrar) {
   auto channel =
       std::make_unique<flutter::MethodChannel<flutter::EncodableValue>>(
-          registrar->messenger(), "native_add",
+          registrar->messenger(), "native_cpp",
           &flutter::StandardMethodCodec::GetInstance());
 
   auto plugin = std::make_unique<NativeCppPlugin>();

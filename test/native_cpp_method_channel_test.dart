@@ -4,7 +4,7 @@ import 'package:native_cpp/native_cpp_method_channel.dart';
 
 void main() {
   MethodChannelNativeCpp platform = MethodChannelNativeCpp();
-  const MethodChannel channel = MethodChannel('native_add');
+  const MethodChannel channel = MethodChannel('native_cpp');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 

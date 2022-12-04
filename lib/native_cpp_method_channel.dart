@@ -7,7 +7,7 @@ import 'native_cpp_platform_interface.dart';
 class MethodChannelNativeCpp extends NativeCppPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('native_add');
+  final methodChannel = const MethodChannel('native_cpp');
 
   @override
   Future<String?> getPlatformVersion() async {
