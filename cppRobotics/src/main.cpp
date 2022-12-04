@@ -1,7 +1,7 @@
-#include "native_add.h"
+#include "cpp_add.h"
 
 int main()
 {
-    native_add(1, 2);
+    cpp_add(1, 2);
     return 0;
 }

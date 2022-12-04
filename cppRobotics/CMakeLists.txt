@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CPP_ROBOTICS_SRCS
-	src/native_add.cpp
+	src/cpp_add.cpp
 )
 
 add_library(cpp_robotics_library SHARED
@@ -24,7 +24,7 @@ target_link_libraries(cpp_robotics_test
 )
 
 set_target_properties(cpp_robotics_library PROPERTIES
-    PUBLIC_HEADER native_add.h
+    PUBLIC_HEADER cpp_add.h
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
     OUTPUT_NAME "cpp_robotics"

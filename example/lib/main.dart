@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Running on: $_platformVersion'),
-              Text('1 + 2 == ${nativeAdd(1, 2)}'),
+              Text('1 + 2 == ${cppAdd(1, 2)}'),
             ],
           ),
         ),
