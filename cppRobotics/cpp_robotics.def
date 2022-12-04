@@ -1,0 +1,3 @@
+LIBRARY   cpp_robotics
+EXPORTS
+   native_add

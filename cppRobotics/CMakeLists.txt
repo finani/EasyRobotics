@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 project(CppRobotics VERSION 1.0.0 LANGUAGES CXX)
 
@@ -12,7 +12,7 @@ set(CPP_ROBOTICS_SRCS
 
 add_library(cpp_robotics_library SHARED
   ${CPP_ROBOTICS_SRCS}
-  native_add.def
+  cpp_robotics.def
 )
 
 add_executable(cpp_robotics_test
@@ -20,13 +20,13 @@ add_executable(cpp_robotics_test
 )
 
 target_link_libraries(cpp_robotics_test
-cpp_robotics_library
+  cpp_robotics_library
 )
 
 set_target_properties(cpp_robotics_library PROPERTIES
     PUBLIC_HEADER native_add.h
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
-    OUTPUT_NAME "native_add"
+    OUTPUT_NAME "cpp_robotics"
     XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Hex_Identity_ID_Goes_Here"
 )

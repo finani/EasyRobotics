@@ -5,12 +5,12 @@ import 'package:path/path.dart' as path;
 
 final String libraryPath = Platform.isLinux
     ? path.join(Directory.current.parent.path, 'cppRobotics', 'build',
-        'libnative_add.so')
+        'libcpp_robotics.so')
     : Platform.isWindows
         ? path.join(Directory.current.parent.path, 'cppRobotics', 'build',
-            'Debug', 'native_add.dll')
+            'Debug', 'cpp_robotics.dll')
         : Platform.isAndroid
-            ? 'libnative_add.so'
+            ? 'libcpp_robotics.so'
             : "";
 
 final DynamicLibrary cppRoboticsLib = (Platform.isIOS || Platform.isMacOS)
