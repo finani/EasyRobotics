@@ -1,4 +1,4 @@
-package com.example.native_add_example
+package com.example.easy_robotics
 
 import io.flutter.embedding.android.FlutterActivity
 
