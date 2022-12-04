@@ -36,8 +36,8 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.example.native_add
-        pluginClass: NativeAddPlugin
+        package: com.example.native_cpp
+        pluginClass: NativeCppPlugin
       ios:
         pluginClass: NativeAddPlugin
       linux:
