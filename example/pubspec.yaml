@@ -1,4 +1,4 @@
-name: native_add_example
+name: easy_robotics
 description: Demonstrates how to use the native_add plugin.
 
 # The following line prevents the package from being accidentally published to

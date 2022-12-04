@@ -1,4 +1,4 @@
-# native_add_example
+# easy_robotics
 
 Demonstrates how to use the native_add plugin.
 
