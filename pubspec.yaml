@@ -1,4 +1,4 @@
-name: native_add
+name: native_cpp
 description: A new Flutter plugin project.
 version: 0.0.1
 homepage:
@@ -45,7 +45,7 @@ flutter:
       macos:
         pluginClass: NativeAddPlugin
       windows:
-        pluginClass: NativeAddPluginCApi
+        pluginClass: NativeCppPluginCApi
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

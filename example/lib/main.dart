@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:native_add/native_add.dart';
+import 'package:native_cpp/native_add.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,4 +1,4 @@
-#include "native_add_plugin.h"
+#include "native_cpp_plugin.h"
 
 // This must be included before many other Windows headers.
 #include <windows.h>
@@ -13,17 +13,17 @@
 #include <memory>
 #include <sstream>
 
-namespace native_add {
+namespace native_cpp {
 
 // static
-void NativeAddPlugin::RegisterWithRegistrar(
+void NativeCppPlugin::RegisterWithRegistrar(
     flutter::PluginRegistrarWindows *registrar) {
   auto channel =
       std::make_unique<flutter::MethodChannel<flutter::EncodableValue>>(
           registrar->messenger(), "native_add",
           &flutter::StandardMethodCodec::GetInstance());
 
-  auto plugin = std::make_unique<NativeAddPlugin>();
+  auto plugin = std::make_unique<NativeCppPlugin>();
 
   channel->SetMethodCallHandler(
       [plugin_pointer = plugin.get()](const auto &call, auto result) {
@@ -33,11 +33,11 @@ void NativeAddPlugin::RegisterWithRegistrar(
   registrar->AddPlugin(std::move(plugin));
 }
 
-NativeAddPlugin::NativeAddPlugin() {}
+NativeCppPlugin::NativeCppPlugin() {}
 
-NativeAddPlugin::~NativeAddPlugin() {}
+NativeCppPlugin::~NativeCppPlugin() {}
 
-void NativeAddPlugin::HandleMethodCall(
+void NativeCppPlugin::HandleMethodCall(
     const flutter::MethodCall<flutter::EncodableValue> &method_call,
     std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result) {
   if (method_call.method_name().compare("getPlatformVersion") == 0) {
@@ -56,4 +56,4 @@ void NativeAddPlugin::HandleMethodCall(
   }
 }
 
-}  // namespace native_add
+}  // namespace native_cpp

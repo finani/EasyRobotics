@@ -20,9 +20,9 @@ dependencies:
 
   path: ^1.8.0
 
-  native_add:
+  native_cpp:
     # When depending on this package from a real application you should use:
-    #   native_add: ^x.y.z
+    #   native_cpp: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.

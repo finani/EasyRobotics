@@ -1,12 +1,12 @@
-#include "include/native_add/native_add_plugin_c_api.h"
+#include "include/native_cpp/native_cpp_plugin_c_api.h"
 
 #include <flutter/plugin_registrar_windows.h>
 
-#include "native_add_plugin.h"
+#include "native_cpp_plugin.h"
 
-void NativeAddPluginCApiRegisterWithRegistrar(
+void NativeCppPluginCApiRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar) {
-  native_add::NativeAddPlugin::RegisterWithRegistrar(
+  native_cpp::NativeCppPlugin::RegisterWithRegistrar(
       flutter::PluginRegistrarManager::GetInstance()
           ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
 }

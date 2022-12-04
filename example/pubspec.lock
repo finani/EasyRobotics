@@ -95,7 +95,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  native_add:
+  native_cpp:
     dependency: "direct main"
     description:
       path: ".."
