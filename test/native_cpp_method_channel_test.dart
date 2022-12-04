@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:native_add/native_add_method_channel.dart';
+import 'package:native_cpp/native_cpp_method_channel.dart';
 
 void main() {
-  MethodChannelNativeAdd platform = MethodChannelNativeAdd();
+  MethodChannelNativeCpp platform = MethodChannelNativeCpp();
   const MethodChannel channel = MethodChannel('native_add');
 
   TestWidgetsFlutterBinding.ensureInitialized();
