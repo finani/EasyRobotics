@@ -41,7 +41,7 @@ flutter:
       ios:
         pluginClass: NativeAddPlugin
       linux:
-        pluginClass: NativeAddPlugin
+        pluginClass: NativeCppPlugin
       macos:
         pluginClass: NativeAddPlugin
       windows:

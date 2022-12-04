@@ -3,7 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  native_add
+  native_cpp
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

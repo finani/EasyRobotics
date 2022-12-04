@@ -1,4 +1,4 @@
-#include "include/native_add/native_add_plugin.h"
+#include "include/native_cpp/native_cpp_plugin.h"
 
 #include <flutter_linux/flutter_linux.h>
 #include <gtk/gtk.h>
@@ -6,19 +6,19 @@
 
 #include <cstring>
 
-#define NATIVE_ADD_PLUGIN(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST((obj), native_add_plugin_get_type(), \
-                              NativeAddPlugin))
+#define NATIVE_CPP_PLUGIN(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST((obj), native_cpp_plugin_get_type(), \
+                              NativeCppPlugin))
 
-struct _NativeAddPlugin {
+struct _NativeCppPlugin {
   GObject parent_instance;
 };
 
-G_DEFINE_TYPE(NativeAddPlugin, native_add_plugin, g_object_get_type())
+G_DEFINE_TYPE(NativeCppPlugin, native_cpp_plugin, g_object_get_type())
 
 // Called when a method call is received from Flutter.
-static void native_add_plugin_handle_method_call(
-    NativeAddPlugin* self,
+static void native_cpp_plugin_handle_method_call(
+    NativeCppPlugin* self,
     FlMethodCall* method_call) {
   g_autoptr(FlMethodResponse) response = nullptr;
 
@@ -37,30 +37,30 @@ static void native_add_plugin_handle_method_call(
   fl_method_call_respond(method_call, response, nullptr);
 }
 
-static void native_add_plugin_dispose(GObject* object) {
-  G_OBJECT_CLASS(native_add_plugin_parent_class)->dispose(object);
+static void native_cpp_plugin_dispose(GObject* object) {
+  G_OBJECT_CLASS(native_cpp_plugin_parent_class)->dispose(object);
 }
 
-static void native_add_plugin_class_init(NativeAddPluginClass* klass) {
-  G_OBJECT_CLASS(klass)->dispose = native_add_plugin_dispose;
+static void native_cpp_plugin_class_init(NativeCppPluginClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = native_cpp_plugin_dispose;
 }
 
-static void native_add_plugin_init(NativeAddPlugin* self) {}
+static void native_cpp_plugin_init(NativeCppPlugin* self) {}
 
 static void method_call_cb(FlMethodChannel* channel, FlMethodCall* method_call,
                            gpointer user_data) {
-  NativeAddPlugin* plugin = NATIVE_ADD_PLUGIN(user_data);
-  native_add_plugin_handle_method_call(plugin, method_call);
+  NativeCppPlugin* plugin = NATIVE_CPP_PLUGIN(user_data);
+  native_cpp_plugin_handle_method_call(plugin, method_call);
 }
 
-void native_add_plugin_register_with_registrar(FlPluginRegistrar* registrar) {
-  NativeAddPlugin* plugin = NATIVE_ADD_PLUGIN(
-      g_object_new(native_add_plugin_get_type(), nullptr));
+void native_cpp_plugin_register_with_registrar(FlPluginRegistrar* registrar) {
+  NativeCppPlugin* plugin = NATIVE_CPP_PLUGIN(
+      g_object_new(native_cpp_plugin_get_type(), nullptr));
 
   g_autoptr(FlStandardMethodCodec) codec = fl_standard_method_codec_new();
   g_autoptr(FlMethodChannel) channel =
       fl_method_channel_new(fl_plugin_registrar_get_messenger(registrar),
-                            "native_add",
+                            "native_cpp",
                             FL_METHOD_CODEC(codec));
   fl_method_channel_set_method_call_handler(channel, method_call_cb,
                                             g_object_ref(plugin),

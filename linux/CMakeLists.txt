@@ -1,22 +1,22 @@
-# The Flutter tooling requires that developers have CMake 3.10 or later
+# The Flutter tooling requires that developers have CMake 3.14 or later
 # installed. You should not increase this version, as doing so will cause
 # the plugin to fail to compile for some customers of the plugin.
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 
 # Project-level configuration.
-set(PROJECT_NAME "native_add")
+set(PROJECT_NAME "native_cpp_linux")
 project(${PROJECT_NAME} LANGUAGES CXX)
 
 # This value is used when generating builds using this plugin, so it must
 # not be changed.
-set(PLUGIN_NAME "native_add_plugin")
+set(PLUGIN_NAME "native_cpp_plugin")
 
 # Define the plugin library target. Its name must not be changed (see comment
 # on PLUGIN_NAME above).
 #
 # Any new source files that you add to the plugin should be added here.
 add_library(${PLUGIN_NAME} SHARED
-  "native_add_plugin.cc"
+  "native_cpp_plugin.cc"
 )
 
 # Apply a standard set of build settings that are configured in the

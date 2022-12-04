@@ -1,4 +1,4 @@
-# native_add
+# native_cpp
 
 A new Flutter plugin project.
 
