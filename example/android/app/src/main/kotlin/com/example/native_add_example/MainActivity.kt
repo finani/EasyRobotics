@@ -1,4 +1,4 @@
-package com.example.easy_robotics
+package com.weebee.easy_robotics
 
 import io.flutter.embedding.android.FlutterActivity
 

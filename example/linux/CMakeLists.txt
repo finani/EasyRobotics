@@ -7,7 +7,7 @@ project(easy_robotics LANGUAGES CXX)
 set(BINARY_NAME "easy-robotics")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
-set(APPLICATION_ID "com.example.native_cpp")
+set(APPLICATION_ID "com.weebee.native_cpp")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.easy_robotics">
+    package="com.weebee.easy_robotics">
    <application
         android:label="Easy Robotics"
         android:name="${applicationName}"

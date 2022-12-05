@@ -1,4 +1,4 @@
-package com.example.native_cpp
+package com.weebee.native_cpp
 
 import androidx.annotation.NonNull
 

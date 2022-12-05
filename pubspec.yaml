@@ -36,7 +36,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.example.native_cpp
+        package: com.weebee.native_cpp
         pluginClass: NativeCppPlugin
       ios:
         pluginClass: NativeCppPlugin
