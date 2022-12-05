@@ -1,10 +1,10 @@
 import Cocoa
 import FlutterMacOS
 
-public class NativeAddPlugin: NSObject, FlutterPlugin {
+public class NativeCppPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "native_add", binaryMessenger: registrar.messenger)
-    let instance = NativeAddPlugin()
+    let channel = FlutterMethodChannel(name: "native_cpp", binaryMessenger: registrar.messenger)
+    let instance = NativeCppPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 

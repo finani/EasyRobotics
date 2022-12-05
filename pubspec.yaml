@@ -43,7 +43,7 @@ flutter:
       linux:
         pluginClass: NativeCppPlugin
       macos:
-        pluginClass: NativeAddPlugin
+        pluginClass: NativeCppPlugin
       windows:
         pluginClass: NativeCppPluginCApi
 

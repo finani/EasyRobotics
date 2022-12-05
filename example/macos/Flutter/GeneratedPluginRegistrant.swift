@@ -8,5 +8,5 @@ import Foundation
 import native_cpp
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  NativeAddPlugin.register(with: registry.registrar(forPlugin: "NativeAddPlugin"))
+  NativeCppPlugin.register(with: registry.registrar(forPlugin: "NativeCppPlugin"))
 }
