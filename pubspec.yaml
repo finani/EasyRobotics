@@ -39,7 +39,7 @@ flutter:
         package: com.example.native_cpp
         pluginClass: NativeCppPlugin
       ios:
-        pluginClass: NativeAddPlugin
+        pluginClass: NativeCppPlugin
       linux:
         pluginClass: NativeCppPlugin
       macos:

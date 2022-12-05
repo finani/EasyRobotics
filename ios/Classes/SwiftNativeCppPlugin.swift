@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class SwiftNativeAddPlugin: NSObject, FlutterPlugin {
+public class SwiftNativeCppPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "native_add", binaryMessenger: registrar.messenger())
-    let instance = SwiftNativeAddPlugin()
+    let channel = FlutterMethodChannel(name: "native_cpp", binaryMessenger: registrar.messenger())
+    let instance = SwiftNativeCppPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
