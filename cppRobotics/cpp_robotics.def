@@ -1,3 +1,0 @@
-LIBRARY   cpp_robotics
-EXPORTS
-   cpp_add
