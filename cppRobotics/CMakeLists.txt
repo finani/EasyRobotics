@@ -10,9 +10,13 @@ set(CPP_ROBOTICS_SRCS
 	src/cpp_add.cpp
 )
 
+set(CPP_ROBOTICS_EXTERNS
+	extern/filter/FirstOrderFilter.cpp
+)
+
 add_library(cpp_robotics_library SHARED
   ${CPP_ROBOTICS_SRCS}
-  cpp_robotics.def
+  ${CPP_ROBOTICS_EXTERNS}
 )
 
 add_executable(cpp_robotics
