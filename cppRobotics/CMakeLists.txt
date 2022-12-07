@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 project(CppRobotics VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+
+find_package(Eigen3 REQUIRED NO_MODULE)
 
 set(CPP_ROBOTICS_SRCS
 	src/cpp_add.cpp
@@ -28,7 +28,7 @@ target_link_libraries(cpp_robotics
 )
 
 set_target_properties(cpp_robotics_library PROPERTIES
-    PUBLIC_HEADER cpp_add.h
+    PUBLIC_HEADER extern/CppRobotics.h
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
     OUTPUT_NAME "cpp_robotics"
