@@ -17,10 +17,6 @@ final DynamicLibrary cppRoboticsLib = (Platform.isIOS || Platform.isMacOS)
     ? DynamicLibrary.process()
     : DynamicLibrary.open(libraryPath);
 
-final int Function(int x, int y) cppAdd = cppRoboticsLib
-    .lookup<NativeFunction<Int32 Function(Int32, Int32)>>('cpp_add')
-    .asFunction();
-
 class NativeCpp {
   Future<String?> getPlatformVersion() {
     return NativeCppPlatform.instance.getPlatformVersion();

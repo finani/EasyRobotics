@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:native_cpp/native_cpp.dart';
+import 'package:native_cpp/cpp_add.dart';
 
 void main() {
   runApp(const MyApp());
