@@ -4,7 +4,7 @@ project(CppRobotics VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 
-find_package(Eigen3 REQUIRED NO_MODULE)
+# find_package(Eigen3 REQUIRED NO_MODULE)
 
 set(CPP_ROBOTICS_SRCS
 	src/cpp_add.cpp
@@ -35,4 +35,4 @@ set_target_properties(cpp_robotics_library PROPERTIES
     XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Hex_Identity_ID_Goes_Here"
 )
 
-add_subdirectory(test)
+# add_subdirectory(test)
