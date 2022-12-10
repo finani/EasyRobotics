@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:flutter/services.dart';
 import 'package:native_cpp/native_cpp.dart';
 import 'package:native_cpp/cpp_add.dart';
@@ -25,6 +27,9 @@ class _MyAppState extends State<MyApp> {
   Timer? _timer;
   final List<_ChartData> _chartData = [];
   double _step = 0.0;
+  double _input = 1.0;
+  double _newInput = 1.0;
+  final _dataPointMaxNumber = 20;
 
   @override
   void initState() {
@@ -34,6 +39,12 @@ class _MyAppState extends State<MyApp> {
     firstOrderFilterResetFilter();
     const timeConstantSec = 0.1;
     firstOrderFilterSetParams(0.0, timeConstantSec);
+
+    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      setState(() {
+        _getChartData(_input);
+      });
+    });
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -60,13 +71,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    _getChartData();
-    _timer = Timer(const Duration(seconds: 1), () {
-      setState(() {
-        _getChartData();
-      });
-    });
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -78,7 +82,13 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('Running on: $_platformVersion'),
               Text('1 + 2 == ${cppAdd(1, 2)}'),
-              _buildAnimationLineChart(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildAnimationLineChart(),
+                  _buildVerticalSlider(),
+                ],
+              ),
             ],
           ),
         ),
@@ -92,11 +102,13 @@ class _MyAppState extends State<MyApp> {
         plotAreaBorderWidth: 0,
         primaryXAxis:
             NumericAxis(majorGridLines: const MajorGridLines(width: 0)),
+        legend: Legend(isVisible: true),
         primaryYAxis: NumericAxis(
-            majorTickLines: const MajorTickLines(color: Colors.transparent),
-            axisLine: const AxisLine(width: 0),
-            minimum: 0,
-            maximum: 1),
+          majorTickLines: const MajorTickLines(color: Colors.transparent),
+          axisLine: const AxisLine(width: 0),
+          minimum: 0,
+          maximum: 1,
+        ),
         series: _getDefaultLineSeries());
   }
 
@@ -123,12 +135,48 @@ class _MyAppState extends State<MyApp> {
     _chartData.clear();
   }
 
-  void _getChartData() {
-    const input = 1.0;
-    final output = firstOrderFilterCalc(input);
-    _chartData.add(_ChartData(_step, output, input));
+  void _getChartData(double newInput) {
+    final output = firstOrderFilterCalc(newInput);
+    _chartData.add(_ChartData(_step, output, newInput));
+    if (_chartData.length > _dataPointMaxNumber) {
+      _chartData.removeAt(0);
+    }
     _step += 1;
     _timer?.cancel();
+  }
+
+  Widget _buildVerticalSlider() {
+    return SizedBox(
+      width: 100,
+      height: 100,
+      child: SfSliderTheme(
+        data: SfSliderThemeData(
+          thumbRadius: 0,
+          overlayRadius: 10,
+          overlayColor: Colors.blue,
+        ),
+        child: SfSlider.vertical(
+          min: 0.0,
+          max: 1.0,
+          interval: 0.2,
+          showTicks: true,
+          showLabels: true,
+          enableTooltip: true,
+          minorTicksPerInterval: 1,
+          value: _newInput,
+          onChanged: (dynamic newValue) {
+            setState(() {
+              _newInput = newValue;
+            });
+          },
+          onChangeEnd: (dynamic newValue) {
+            setState(() {
+              _input = _newInput;
+            });
+          },
+        ),
+      ),
+    );
   }
 }
 
