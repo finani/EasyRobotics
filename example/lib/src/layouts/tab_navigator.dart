@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_robotics/src/layouts/tab_item.dart';
+import 'package:easy_robotics/src/layouts/tab_navigator_routes.dart';
 import 'package:easy_robotics/src/pages/home.dart';
 import 'package:easy_robotics/src/pages/info.dart';
 import 'package:easy_robotics/src/pages/maps.dart';
 import 'package:easy_robotics/src/pages/methods.dart';
-
-class TabNavigatorRoutes {
-  static const String root = '/';
-  static const String filter = '/filter';
-}
 
 class TabNavigator extends StatelessWidget {
   const TabNavigator({
@@ -52,6 +48,12 @@ class TabNavigator extends StatelessWidget {
           TabNavigatorRoutes.filter: (context) => Methods(
                 appBarColor: appBarColor,
                 route: TabNavigatorRoutes.filter,
+                itemKey: itemKey,
+                onPush: _push,
+              ),
+          TabNavigatorRoutes.guidance: (context) => Methods(
+                appBarColor: appBarColor,
+                route: TabNavigatorRoutes.guidance,
                 itemKey: itemKey,
                 onPush: _push,
               ),

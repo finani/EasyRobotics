@@ -72,7 +72,7 @@ class _FirstOrderFilterState extends State<FirstOrderFilter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Index 01: FirstOrderFilter"),
+        title: const Text("Index 01: First Order Filter"),
         backgroundColor: widget.appBarColor,
       ),
       body: Center(
