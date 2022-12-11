@@ -27,10 +27,13 @@ class _MyAppState extends State<MyApp> {
 
   Timer? _timer;
   final List<_ChartData> _chartData = [];
-  double _step = 0.0;
-  double _input = 1.0;
-  double _newInput = 1.0;
-  final _dataPointMaxNumber = 20;
+  double _timeConstantSec = 0.2;
+  double _cutOffFreqHz = 0.8;
+  double _timeSec = 0.0;
+  final _stepTimeMillisecond = 100;
+  double _input = 0.8;
+  double _newInput = 0.8;
+  final _dataPointMaxNumber = 50;
 
   @override
   void initState() {
@@ -38,10 +41,10 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
 
     firstOrderFilterResetFilter();
-    const timeConstantSec = 0.1;
-    firstOrderFilterSetParams(0.0, timeConstantSec);
+    firstOrderFilterSetParams(0.0, _timeConstantSec);
+    _cutOffFreqHz = firstOrderFilterGetParams()[0];
 
-    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    Timer.periodic(Duration(milliseconds: _stepTimeMillisecond), (timer) {
       setState(() {
         _getChartData(_input);
       });
@@ -134,12 +137,15 @@ class _MyAppState extends State<MyApp> {
         plotAreaBorderWidth: 0,
         primaryXAxis:
             NumericAxis(majorGridLines: const MajorGridLines(width: 0)),
-        legend: Legend(isVisible: true),
         primaryYAxis: NumericAxis(
           majorTickLines: const MajorTickLines(color: Colors.transparent),
           axisLine: const AxisLine(width: 0),
           minimum: 0,
           maximum: 1,
+        ),
+        legend: Legend(
+          isVisible: true,
+          position: LegendPosition.bottom,
         ),
         series: _getDefaultLineSeries());
   }
@@ -148,15 +154,17 @@ class _MyAppState extends State<MyApp> {
   List<LineSeries<_ChartData, num>> _getDefaultLineSeries() {
     return <LineSeries<_ChartData, num>>[
       LineSeries<_ChartData, num>(
-          dataSource: _chartData,
-          xValueMapper: (_ChartData sales, _) => sales.x,
-          yValueMapper: (_ChartData sales, _) => sales.y,
-          markerSettings: const MarkerSettings(isVisible: true)),
+        name: 'Input Value',
+        dataSource: _chartData,
+        xValueMapper: (_ChartData sales, _) => sales.x,
+        yValueMapper: (_ChartData sales, _) => sales.y,
+      ),
       LineSeries<_ChartData, num>(
-          dataSource: _chartData,
-          xValueMapper: (_ChartData sales, _) => sales.x,
-          yValueMapper: (_ChartData sales, _) => sales.y2,
-          markerSettings: const MarkerSettings(isVisible: true))
+        name: 'Output Value',
+        dataSource: _chartData,
+        xValueMapper: (_ChartData sales, _) => sales.x,
+        yValueMapper: (_ChartData sales, _) => sales.y2,
+      ),
     ];
   }
 
@@ -169,18 +177,18 @@ class _MyAppState extends State<MyApp> {
 
   void _getChartData(double newInput) {
     final output = firstOrderFilterCalc(newInput);
-    _chartData.add(_ChartData(_step, output, newInput));
+    _chartData.add(_ChartData(_timeSec, newInput, output));
     if (_chartData.length > _dataPointMaxNumber) {
       _chartData.removeAt(0);
     }
-    _step += 1;
+    _timeSec += _stepTimeMillisecond / 1000.0;
     _timer?.cancel();
   }
 
   Widget _buildVerticalSlider() {
     return SizedBox(
       width: 100,
-      height: 100,
+      height: 300,
       child: SfSliderTheme(
         data: SfSliderThemeData(
           thumbRadius: 0,
