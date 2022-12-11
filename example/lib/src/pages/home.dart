@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_robotics/src/data/common_types.dart';
-import 'package:easy_robotics/src/layouts/tab_navigator.dart';
-import 'package:easy_robotics/src/pages/filter/filter_item.dart';
+import 'package:easy_robotics/src/layouts/tab_navigator_routes.dart';
 import 'package:easy_robotics/src/widgets/item_card.dart';
 
 class Home extends StatelessWidget {
@@ -22,15 +21,26 @@ class Home extends StatelessWidget {
         title: const Text("Index 0: Home"),
         backgroundColor: appBarColor,
       ),
-      body: Center(
-        child: buildItemCard(
-          context,
-          route: TabNavigatorRoutes.filter,
-          itemKey: FilterItem.filter,
-          onPush: onPush,
-          cardHeightRatio: 0.2,
-          cardWidthRatio: 0.2,
+      body: GridView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 12,
+          childAspectRatio: 4 / 3,
         ),
+        itemCount: TabNavigatorRoutes.getTabNavigatorRoutesList().length,
+        itemBuilder: (context, index) {
+          return buildItemCard(
+            context,
+            route: TabNavigatorRoutes.getTabNavigatorRoutesList()[index],
+            itemKey: "",
+            onPush: onPush,
+            cardHeightRatio: 0.2,
+            cardWidthRatio: 0.2,
+          );
+        },
       ),
     );
   }

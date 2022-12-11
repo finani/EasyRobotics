@@ -37,7 +37,7 @@ Widget buildItemCard(BuildContext context,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(itemKey.toString()),
+              Text(itemKey == "" ? route.substring(1) : itemKey.toString()),
             ],
           ),
         ),
