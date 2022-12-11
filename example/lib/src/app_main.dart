@@ -13,19 +13,21 @@ class AppMain extends StatefulWidget {
   });
 
   @override
-  State<AppMain> createState() => _MyAppState();
+  State<AppMain> createState() => _AppMainState();
 }
 
-class _MyAppState extends State<AppMain> {
-  Timer? _timer;
-  final List<_ChartData> _chartData = [];
+class _AppMainState extends State<AppMain> {
+  final List<FilterChartData> _chartData = [];
+  final _dataPointMaxNumber = 50;
+
   double _timeConstantSec = 0.2;
-  double _cutOffFreqHz = 0.8;
+  late double _cutOffFreqHz;
+
   double _timeSec = 0.0;
   final _stepTimeMillisecond = 100;
-  double _input = 0.8;
-  double _newInput = 0.8;
-  final _dataPointMaxNumber = 50;
+
+  double _inputValue = 0.8;
+  double _newInputValue = 0.8;
 
   @override
   void initState() {
@@ -37,16 +39,22 @@ class _MyAppState extends State<AppMain> {
 
     Timer.periodic(Duration(milliseconds: _stepTimeMillisecond), (timer) {
       setState(() {
-        _getChartData(_input);
+        _getChartData(_inputValue);
       });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _chartData.clear();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Easy Robotics'),
+        title: const Text('First Order Filter'),
       ),
       body: Center(
         child: Column(
@@ -61,8 +69,8 @@ class _MyAppState extends State<AppMain> {
                 ),
                 Column(
                   children: [
-                    const Text("First Order Filter"),
-                    _buildAnimationLineChart(),
+                    const Text("Input vs Output"),
+                    _buildLineChart(),
                   ],
                 ),
                 const Spacer(),
@@ -109,8 +117,17 @@ class _MyAppState extends State<AppMain> {
     );
   }
 
+  void _getChartData(double newInput) {
+    final output = firstOrderFilterCalc(newInput);
+    _chartData.add(FilterChartData(_timeSec, newInput, output));
+    if (_chartData.length > _dataPointMaxNumber) {
+      _chartData.removeAt(0);
+    }
+    _timeSec += _stepTimeMillisecond / 1000.0;
+  }
+
   ///Get the cartesian chart with line series
-  SfCartesianChart _buildAnimationLineChart() {
+  SfCartesianChart _buildLineChart() {
     return SfCartesianChart(
         plotAreaBorderWidth: 0,
         primaryXAxis:
@@ -125,42 +142,25 @@ class _MyAppState extends State<AppMain> {
           isVisible: true,
           position: LegendPosition.bottom,
         ),
-        series: _getDefaultLineSeries());
+        series: _getLineSeries());
   }
 
   /// The method returns line series to chart.
-  List<LineSeries<_ChartData, num>> _getDefaultLineSeries() {
-    return <LineSeries<_ChartData, num>>[
-      LineSeries<_ChartData, num>(
+  List<LineSeries<FilterChartData, num>> _getLineSeries() {
+    return <LineSeries<FilterChartData, num>>[
+      LineSeries<FilterChartData, num>(
         name: 'Input Value',
         dataSource: _chartData,
-        xValueMapper: (_ChartData sales, _) => sales.x,
-        yValueMapper: (_ChartData sales, _) => sales.y,
+        xValueMapper: (FilterChartData sales, _) => sales.time,
+        yValueMapper: (FilterChartData sales, _) => sales.input,
       ),
-      LineSeries<_ChartData, num>(
+      LineSeries<FilterChartData, num>(
         name: 'Output Value',
         dataSource: _chartData,
-        xValueMapper: (_ChartData sales, _) => sales.x,
-        yValueMapper: (_ChartData sales, _) => sales.y2,
+        xValueMapper: (FilterChartData sales, _) => sales.time,
+        yValueMapper: (FilterChartData sales, _) => sales.output,
       ),
     ];
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _timer?.cancel();
-    _chartData.clear();
-  }
-
-  void _getChartData(double newInput) {
-    final output = firstOrderFilterCalc(newInput);
-    _chartData.add(_ChartData(_timeSec, newInput, output));
-    if (_chartData.length > _dataPointMaxNumber) {
-      _chartData.removeAt(0);
-    }
-    _timeSec += _stepTimeMillisecond / 1000.0;
-    _timer?.cancel();
   }
 
   Widget _buildVerticalSlider() {
@@ -181,15 +181,15 @@ class _MyAppState extends State<AppMain> {
           showLabels: true,
           enableTooltip: true,
           minorTicksPerInterval: 1,
-          value: _newInput,
+          value: _newInputValue,
           onChanged: (dynamic newValue) {
             setState(() {
-              _newInput = newValue;
+              _newInputValue = newValue;
             });
           },
           onChangeEnd: (dynamic newValue) {
             setState(() {
-              _input = _newInput;
+              _inputValue = _newInputValue;
             });
           },
         ),
@@ -260,9 +260,9 @@ class _MyAppState extends State<AppMain> {
   }
 }
 
-class _ChartData {
-  _ChartData(this.x, this.y, this.y2);
-  final double x;
-  final double y;
-  final double y2;
+class FilterChartData {
+  FilterChartData(this.time, this.input, this.output);
+  final double time;
+  final double input;
+  final double output;
 }
