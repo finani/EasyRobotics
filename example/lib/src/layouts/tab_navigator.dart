@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:easy_robotics/src/pages/home.dart';
-import 'package:easy_robotics/src/pages/maps.dart';
-import 'package:easy_robotics/src/pages/info.dart';
 import 'package:easy_robotics/src/layouts/tab_item.dart';
+import 'package:easy_robotics/src/pages/filter/filter.dart';
+import 'package:easy_robotics/src/pages/home.dart';
+import 'package:easy_robotics/src/pages/info.dart';
+import 'package:easy_robotics/src/pages/maps.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
+  static const String filter = '/filter';
 }
 
 class TabNavigator extends StatelessWidget {
@@ -23,7 +25,7 @@ class TabNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     final routeBuilders = _routeBuilders(
       context,
-      key: "",
+      itemKey: "",
     );
 
     return Navigator(
@@ -38,7 +40,7 @@ class TabNavigator extends StatelessWidget {
   }
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context,
-      {required String key}) {
+      {required String itemKey}) {
     Color appBarColor = activeTabColor[tabItem] ?? Colors.grey;
     switch (tabItem) {
       case TabItem.home:
@@ -46,6 +48,10 @@ class TabNavigator extends StatelessWidget {
           TabNavigatorRoutes.root: (context) => Home(
                 appBarColor: appBarColor,
                 onPush: _push,
+              ),
+          TabNavigatorRoutes.filter: (context) => Filter(
+                itemKey: itemKey,
+                appBarColor: appBarColor,
               ),
         };
       case TabItem.maps:
@@ -69,10 +75,10 @@ class TabNavigator extends StatelessWidget {
   }
 
   void _push(BuildContext context,
-      {required String route, required String key}) {
+      {required String route, required String itemKey}) {
     final routeBuilders = _routeBuilders(
       context,
-      key: key,
+      itemKey: itemKey,
     );
 
     Navigator.push(
