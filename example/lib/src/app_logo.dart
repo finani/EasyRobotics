@@ -10,10 +10,10 @@ class AppLogo extends StatefulWidget {
   });
 
   @override
-  State<AppLogo> createState() => _MyAppState();
+  State<AppLogo> createState() => _AppLogoState();
 }
 
-class _MyAppState extends State<AppLogo> {
+class _AppLogoState extends State<AppLogo> {
   String _platformVersion = 'Unknown';
   final _nativeCppPlugin = NativeCpp();
 
