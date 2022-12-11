@@ -25,23 +25,21 @@ class BottomNavigation extends StatelessWidget {
         TabItem.values[index],
       ),
       currentIndex: currentTab.index,
-      selectedItemColor: activeTabColor[currentTab],
+      selectedItemColor: currentTab.toMaterialColor(),
     );
   }
 
   BottomNavigationBarItem _buildItem(TabItem tabItem) {
     return BottomNavigationBarItem(
       icon: Icon(
-        tabIcon[tabItem],
+        tabItem.toIconData(),
         color: _colorTabMatching(tabItem),
       ),
-      label: tabName[tabItem],
+      label: tabItem.toString(),
     );
   }
 
   Color _colorTabMatching(TabItem item) {
-    return currentTab == item
-        ? activeTabColor[item] ?? Colors.grey
-        : Colors.grey;
+    return currentTab == item ? item.toMaterialColor() : Colors.grey;
   }
 }
