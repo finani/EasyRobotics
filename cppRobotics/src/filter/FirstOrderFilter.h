@@ -51,6 +51,11 @@ public:
       firstOrderFilterConfig_.cutOffFreqHz =
           1.0 / (2.0 * M_PI * firstOrderFilterConfig_.timeConstantSec);
     }
+    if (firstOrderFilterConfig_.cutOffFreqHz != 0.0 &&
+        firstOrderFilterConfig_.timeConstantSec == 0.0) {
+      firstOrderFilterConfig_.timeConstantSec =
+          1.0 / (2.0 * M_PI * firstOrderFilterConfig_.cutOffFreqHz);
+    }
     isSetParams_ = CheckFilterValid();
   }
 
