@@ -91,17 +91,24 @@ class _MyAppState extends State<MyApp> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const Spacer(
+                    flex: 10,
+                  ),
                   Column(
                     children: [
                       const Text("First Order Filter"),
                       _buildAnimationLineChart(),
                     ],
                   ),
+                  const Spacer(),
                   Column(
                     children: [
                       const Text("Input Value"),
                       _buildVerticalSlider(),
                     ],
+                  ),
+                  const Spacer(
+                    flex: 10,
                   ),
                 ],
               ),
@@ -109,17 +116,24 @@ class _MyAppState extends State<MyApp> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const Spacer(
+                    flex: 10,
+                  ),
                   Column(
                     children: [
                       const Text("Cut off frequency [hz]"),
                       _buildCutOffFreqHzSlider(),
                     ],
                   ),
+                  const Spacer(),
                   Column(
                     children: [
                       const Text("Time Constant [sec]"),
                       _buildTimeConstantSecSlider(),
                     ],
+                  ),
+                  const Spacer(
+                    flex: 10,
                   ),
                 ],
               ),
