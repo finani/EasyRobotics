@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -80,15 +81,46 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Spacer(),
               Text('Running on: $_platformVersion'),
               Text('1 + 2 == ${cppAdd(1, 2)}'),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildAnimationLineChart(),
-                  _buildVerticalSlider(),
+                  Column(
+                    children: [
+                      const Text("First Order Filter"),
+                      _buildAnimationLineChart(),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const Text("Input Value"),
+                      _buildVerticalSlider(),
+                    ],
+                  ),
                 ],
               ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      const Text("Cut off frequency [hz]"),
+                      _buildCutOffFreqHzSlider(),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const Text("Time Constant [sec]"),
+                      _buildTimeConstantSecSlider(),
+                    ],
+                  ),
+                ],
+              ),
+              const Spacer(),
             ],
           ),
         ),
@@ -172,6 +204,68 @@ class _MyAppState extends State<MyApp> {
           onChangeEnd: (dynamic newValue) {
             setState(() {
               _input = _newInput;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCutOffFreqHzSlider() {
+    return SizedBox(
+      width: 200,
+      height: 100,
+      child: SfSliderTheme(
+        data: SfSliderThemeData(
+          thumbRadius: 0,
+          overlayRadius: 10,
+          overlayColor: Colors.blue,
+        ),
+        child: SfSlider(
+          min: 0.2,
+          max: 0.8,
+          interval: 0.2,
+          showTicks: true,
+          showLabels: true,
+          enableTooltip: true,
+          minorTicksPerInterval: 1,
+          value: _cutOffFreqHz,
+          onChanged: (dynamic newValue) {
+            setState(() {
+              _cutOffFreqHz = newValue;
+              firstOrderFilterSetParams(_cutOffFreqHz, 0.0);
+              _timeConstantSec = firstOrderFilterGetParams()[1];
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTimeConstantSecSlider() {
+    return SizedBox(
+      width: 200,
+      height: 100,
+      child: SfSliderTheme(
+        data: SfSliderThemeData(
+          thumbRadius: 0,
+          overlayRadius: 10,
+          overlayColor: Colors.blue,
+        ),
+        child: SfSlider(
+          min: 0.2,
+          max: 0.8,
+          interval: 0.2,
+          showTicks: true,
+          showLabels: true,
+          enableTooltip: true,
+          minorTicksPerInterval: 1,
+          value: _timeConstantSec,
+          onChanged: (dynamic newValue) {
+            setState(() {
+              _timeConstantSec = newValue;
+              firstOrderFilterSetParams(0.0, _timeConstantSec);
+              _cutOffFreqHz = firstOrderFilterGetParams()[0];
             });
           },
         ),
