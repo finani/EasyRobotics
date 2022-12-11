@@ -4,7 +4,7 @@ import 'package:easy_robotics/src/layouts/tab_item.dart';
 import 'package:easy_robotics/src/pages/home.dart';
 import 'package:easy_robotics/src/pages/info.dart';
 import 'package:easy_robotics/src/pages/maps.dart';
-import 'package:easy_robotics/src/pages/method.dart';
+import 'package:easy_robotics/src/pages/methods.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
@@ -49,7 +49,7 @@ class TabNavigator extends StatelessWidget {
                 appBarColor: appBarColor,
                 onPush: _push,
               ),
-          TabNavigatorRoutes.filter: (context) => Method(
+          TabNavigatorRoutes.filter: (context) => Methods(
                 appBarColor: appBarColor,
                 route: TabNavigatorRoutes.filter,
                 itemKey: itemKey,

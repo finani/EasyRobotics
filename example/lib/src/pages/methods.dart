@@ -5,8 +5,8 @@ import 'package:easy_robotics/src/pages/filter/filter_item.dart';
 import 'package:easy_robotics/src/pages/filter/first_order_filter.dart';
 import 'package:easy_robotics/src/widgets/item_card.dart';
 
-class Method extends StatelessWidget {
-  const Method({
+class Methods extends StatelessWidget {
+  const Methods({
     super.key,
     required this.appBarColor,
     required this.route,
@@ -25,7 +25,7 @@ class Method extends StatelessWidget {
       case FilterItem.filter:
         return Scaffold(
           appBar: AppBar(
-            title: Text("Index 00: Method ($route)"),
+            title: Text("Index 00: Methods ($route)"),
             backgroundColor: appBarColor,
           ),
           body: Center(
@@ -44,7 +44,7 @@ class Method extends StatelessWidget {
       default:
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Index 00: Unknown Method"),
+            title: const Text("Index 00: Unknown Methods"),
             backgroundColor: appBarColor,
           ),
           body: const Center(
