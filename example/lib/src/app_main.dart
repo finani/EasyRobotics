@@ -6,6 +6,7 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:native_cpp/filter/first_order_filter.dart';
+import 'package:easy_robotics/src/data/filter_chart_data.dart';
 
 class AppMain extends StatefulWidget {
   const AppMain({
@@ -17,7 +18,7 @@ class AppMain extends StatefulWidget {
 }
 
 class _AppMainState extends State<AppMain> {
-  final List<FilterChartData> _chartData = [];
+  final List<FilterChartData> _filterChartData = [];
   final _dataPointMaxNumber = 50;
 
   double _timeConstantSec = 0.2;
@@ -47,7 +48,7 @@ class _AppMainState extends State<AppMain> {
   @override
   void dispose() {
     super.dispose();
-    _chartData.clear();
+    _filterChartData.clear();
   }
 
   @override
@@ -119,9 +120,9 @@ class _AppMainState extends State<AppMain> {
 
   void _getChartData(double newInput) {
     final output = firstOrderFilterCalc(newInput);
-    _chartData.add(FilterChartData(_timeSec, newInput, output));
-    if (_chartData.length > _dataPointMaxNumber) {
-      _chartData.removeAt(0);
+    _filterChartData.add(FilterChartData(_timeSec, newInput, output));
+    if (_filterChartData.length > _dataPointMaxNumber) {
+      _filterChartData.removeAt(0);
     }
     _timeSec += _stepTimeMillisecond / 1000.0;
   }
@@ -150,13 +151,13 @@ class _AppMainState extends State<AppMain> {
     return <LineSeries<FilterChartData, num>>[
       LineSeries<FilterChartData, num>(
         name: 'Input Value',
-        dataSource: _chartData,
+        dataSource: _filterChartData,
         xValueMapper: (FilterChartData sales, _) => sales.time,
         yValueMapper: (FilterChartData sales, _) => sales.input,
       ),
       LineSeries<FilterChartData, num>(
         name: 'Output Value',
-        dataSource: _chartData,
+        dataSource: _filterChartData,
         xValueMapper: (FilterChartData sales, _) => sales.time,
         yValueMapper: (FilterChartData sales, _) => sales.output,
       ),
@@ -258,11 +259,4 @@ class _AppMainState extends State<AppMain> {
       ),
     );
   }
-}
-
-class FilterChartData {
-  FilterChartData(this.time, this.input, this.output);
-  final double time;
-  final double input;
-  final double output;
 }
