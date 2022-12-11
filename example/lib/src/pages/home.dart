@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_robotics/src/data/common_types.dart';
+import 'package:easy_robotics/src/layouts/tab_navigator.dart';
+import 'package:easy_robotics/src/pages/filter/filter_item.dart';
 import 'package:easy_robotics/src/widgets/item_card.dart';
 
 class Home extends StatelessWidget {
@@ -23,8 +25,9 @@ class Home extends StatelessWidget {
       body: Center(
         child: buildItemCard(
           context,
+          route: TabNavigatorRoutes.filter,
+          itemKey: FilterItem.filter,
           onPush: onPush,
-          itemKey: "Filter",
           cardHeightRatio: 0.2,
           cardWidthRatio: 0.2,
         ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_robotics/src/data/common_types.dart';
-import 'package:easy_robotics/src/layouts/tab_navigator.dart';
 
 Widget buildItemCard(BuildContext context,
-    {required OnPush onPush,
-    required String itemKey,
+    {required String route,
+    required dynamic itemKey,
+    required OnPush onPush,
     required double cardWidthRatio,
     required double cardHeightRatio}) {
   final screenWidth = MediaQuery.of(context).size.width;
@@ -30,13 +30,15 @@ Widget buildItemCard(BuildContext context,
       child: InkWell(
         onTap: () => onPush.call(
           context,
-          route: TabNavigatorRoutes.filter,
+          route: route,
           itemKey: itemKey,
         ),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text(itemKey)],
+            children: [
+              Text(itemKey.toString()),
+            ],
           ),
         ),
       ),
