@@ -6,6 +6,8 @@ extern "C" {
 
 double FirstOrderFilterCalc(double curInput);
 
+double* FirstOrderFilterGetParams();
+
 void FirstOrderFilterSetParams(double cutOffFreqHz, double timeConstantSec);
 
 void FirstOrderFilterResetFilter();
