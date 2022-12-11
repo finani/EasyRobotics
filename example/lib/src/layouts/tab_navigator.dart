@@ -1,3 +1,4 @@
+import 'package:easy_robotics/src/data/common_types.dart';
 import 'package:flutter/material.dart';
 
 import 'package:easy_robotics/src/layouts/tab_item.dart';
@@ -52,6 +53,7 @@ class TabNavigator extends StatelessWidget {
           TabNavigatorRoutes.filter: (context) => Filter(
                 itemKey: itemKey,
                 appBarColor: appBarColor,
+                onPush: _push,
               ),
         };
       case TabItem.maps:
