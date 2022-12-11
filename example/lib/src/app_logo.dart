@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:native_cpp/native_cpp.dart';
 
 class AppLogo extends StatefulWidget {
