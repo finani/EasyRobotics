@@ -41,7 +41,7 @@ class TabNavigator extends StatelessWidget {
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context,
       {required dynamic itemKey}) {
-    Color appBarColor = activeTabColor[tabItem] ?? Colors.grey;
+    Color appBarColor = tabItem.toMaterialColor();
     switch (tabItem) {
       case TabItem.home:
         return {

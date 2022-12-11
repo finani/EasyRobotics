@@ -3,23 +3,45 @@ import 'package:flutter/material.dart';
 enum TabItem {
   home,
   maps,
-  info,
+  info;
+
+  @override
+  String toString() {
+    switch (this) {
+      case home:
+        return 'Home';
+      case maps:
+        return 'Maps';
+      case info:
+        return 'Info';
+      default:
+        return 'Unknown Tab Item';
+    }
+  }
+
+  IconData toIconData() {
+    switch (this) {
+      case home:
+        return Icons.home;
+      case maps:
+        return Icons.assistant_navigation;
+      case info:
+        return Icons.info;
+      default:
+        return Icons.question_mark;
+    }
+  }
+
+  MaterialColor toMaterialColor() {
+    switch (this) {
+      case home:
+        return Colors.blue;
+      case maps:
+        return Colors.teal;
+      case info:
+        return Colors.indigo;
+      default:
+        return Colors.grey;
+    }
+  }
 }
-
-const Map<TabItem, String> tabName = {
-  TabItem.home: 'Home',
-  TabItem.maps: 'Maps',
-  TabItem.info: 'Info',
-};
-
-const Map<TabItem, IconData> tabIcon = {
-  TabItem.home: Icons.home,
-  TabItem.maps: Icons.assistant_navigation,
-  TabItem.info: Icons.info,
-};
-
-const Map<TabItem, MaterialColor> activeTabColor = {
-  TabItem.home: Colors.blue,
-  TabItem.maps: Colors.teal,
-  TabItem.info: Colors.indigo,
-};
