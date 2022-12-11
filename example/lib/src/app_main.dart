@@ -24,7 +24,7 @@ class _AppMainState extends State<AppMain> {
   double _timeConstantSec = 0.2;
   late double _cutOffFreqHz;
 
-  double _timeSec = 0.0;
+  late double _timeSec;
   final _stepTimeMillisecond = 100;
 
   double _inputValue = 0.8;
@@ -34,13 +34,23 @@ class _AppMainState extends State<AppMain> {
   void initState() {
     super.initState();
 
+    _timeSec = 0.0;
     firstOrderFilterResetFilter();
+
     firstOrderFilterSetParams(0.0, _timeConstantSec);
     _cutOffFreqHz = firstOrderFilterGetParams()[0];
 
     Timer.periodic(Duration(milliseconds: _stepTimeMillisecond), (timer) {
       setState(() {
-        _getChartData(_inputValue);
+        final input = _inputValue;
+        final output = firstOrderFilterCalc(input);
+
+        _filterChartData.add(FilterChartData(_timeSec, input, output));
+        if (_filterChartData.length > _dataPointMaxNumber) {
+          _filterChartData.removeAt(0);
+        }
+
+        _timeSec += _stepTimeMillisecond / 1000.0;
       });
     });
   }
@@ -65,50 +75,34 @@ class _AppMainState extends State<AppMain> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(
-                  flex: 10,
-                ),
-                Column(
-                  children: [
-                    const Text("Input vs Output"),
-                    _buildLineChart(),
-                  ],
-                ),
+                const Spacer(flex: 10),
+                Column(children: [
+                  const Text("Input vs Output"),
+                  _buildLineChart(),
+                ]),
                 const Spacer(),
-                Column(
-                  children: [
-                    const Text("Input Value"),
-                    _buildVerticalSlider(),
-                  ],
-                ),
-                const Spacer(
-                  flex: 10,
-                ),
+                Column(children: [
+                  const Text("Input Value"),
+                  _buildInputValueVerticalSlider(),
+                ]),
+                const Spacer(flex: 10),
               ],
             ),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(
-                  flex: 10,
-                ),
-                Column(
-                  children: [
-                    const Text("Cut off frequency [hz]"),
-                    _buildCutOffFreqHzSlider(),
-                  ],
-                ),
+                const Spacer(flex: 10),
+                Column(children: [
+                  const Text("Cut off frequency [hz]"),
+                  _buildCutOffFreqHzSlider(),
+                ]),
                 const Spacer(),
-                Column(
-                  children: [
-                    const Text("Time Constant [sec]"),
-                    _buildTimeConstantSecSlider(),
-                  ],
-                ),
-                const Spacer(
-                  flex: 10,
-                ),
+                Column(children: [
+                  const Text("Time Constant [sec]"),
+                  _buildTimeConstantSecSlider(),
+                ]),
+                const Spacer(flex: 10),
               ],
             ),
             const Spacer(),
@@ -118,32 +112,23 @@ class _AppMainState extends State<AppMain> {
     );
   }
 
-  void _getChartData(double newInput) {
-    final output = firstOrderFilterCalc(newInput);
-    _filterChartData.add(FilterChartData(_timeSec, newInput, output));
-    if (_filterChartData.length > _dataPointMaxNumber) {
-      _filterChartData.removeAt(0);
-    }
-    _timeSec += _stepTimeMillisecond / 1000.0;
-  }
-
   ///Get the cartesian chart with line series
   SfCartesianChart _buildLineChart() {
     return SfCartesianChart(
-        plotAreaBorderWidth: 0,
-        primaryXAxis:
-            NumericAxis(majorGridLines: const MajorGridLines(width: 0)),
-        primaryYAxis: NumericAxis(
-          majorTickLines: const MajorTickLines(color: Colors.transparent),
-          axisLine: const AxisLine(width: 0),
-          minimum: 0,
-          maximum: 1,
-        ),
-        legend: Legend(
-          isVisible: true,
-          position: LegendPosition.bottom,
-        ),
-        series: _getLineSeries());
+      plotAreaBorderWidth: 0,
+      primaryXAxis: NumericAxis(majorGridLines: const MajorGridLines(width: 0)),
+      primaryYAxis: NumericAxis(
+        majorTickLines: const MajorTickLines(color: Colors.transparent),
+        axisLine: const AxisLine(width: 0),
+        minimum: 0,
+        maximum: 1,
+      ),
+      legend: Legend(
+        isVisible: true,
+        position: LegendPosition.bottom,
+      ),
+      series: _getLineSeries(),
+    );
   }
 
   /// The method returns line series to chart.
@@ -164,7 +149,7 @@ class _AppMainState extends State<AppMain> {
     ];
   }
 
-  Widget _buildVerticalSlider() {
+  Widget _buildInputValueVerticalSlider() {
     return SizedBox(
       width: 100,
       height: 300,
