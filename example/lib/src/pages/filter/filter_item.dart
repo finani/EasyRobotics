@@ -1,12 +1,12 @@
 enum FilterItem {
-  firstOrderFilter,
+  lowPassFilter,
   secondOrderFilter;
 
   @override
   String toString() {
     switch (this) {
-      case FilterItem.firstOrderFilter:
-        return 'First Order Filter';
+      case FilterItem.lowPassFilter:
+        return 'Low Pass Filter';
       case FilterItem.secondOrderFilter:
         return 'Second Order Filter';
       default:
@@ -16,7 +16,7 @@ enum FilterItem {
 
   static List<FilterItem> getFilterItemList() {
     return [
-      FilterItem.firstOrderFilter,
+      FilterItem.lowPassFilter,
       FilterItem.secondOrderFilter,
     ];
   }

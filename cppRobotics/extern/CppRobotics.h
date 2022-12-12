@@ -2,6 +2,6 @@
 #define CPP_ROBOTICS_H
 
 #include "../src/cpp_add.h"
-#include "filter/FirstOrderFilter.h"
+#include "filter/LowPassFilter.h"
 
 #endif // !CPP_ROBOTICS_H

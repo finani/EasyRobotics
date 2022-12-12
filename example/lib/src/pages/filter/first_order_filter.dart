@@ -3,13 +3,13 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 
 import 'package:easy_robotics/src/data/filter_chart_data.dart';
-import 'package:native_cpp/filter/first_order_filter.dart';
+import 'package:native_cpp/filter/low_pass_filter.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-class FirstOrderFilter extends StatefulWidget {
-  const FirstOrderFilter({
+class LowPassFilter extends StatefulWidget {
+  const LowPassFilter({
     super.key,
     required this.appBarColor,
   });
@@ -17,10 +17,10 @@ class FirstOrderFilter extends StatefulWidget {
   final Color appBarColor;
 
   @override
-  State<FirstOrderFilter> createState() => _FirstOrderFilterState();
+  State<LowPassFilter> createState() => _LowPassFilterState();
 }
 
-class _FirstOrderFilterState extends State<FirstOrderFilter> {
+class _LowPassFilterState extends State<LowPassFilter> {
   late Timer timer_;
 
   final List<FilterChartData> _filterChartData = [];
@@ -40,16 +40,16 @@ class _FirstOrderFilterState extends State<FirstOrderFilter> {
     super.initState();
 
     _timeSec = 0.0;
-    firstOrderFilterResetFilter();
+    lowPassFilterResetFilter();
 
-    firstOrderFilterSetParams(0.0, _timeConstantSec);
-    _cutOffFreqHz = firstOrderFilterGetParams()[0];
+    lowPassFilterSetParams(0.0, _timeConstantSec);
+    _cutOffFreqHz = lowPassFilterGetParams()[0];
 
     timer_ =
         Timer.periodic(Duration(milliseconds: _stepTimeMillisecond), (timer) {
       setState(() {
         final input = _inputValue;
-        final output = firstOrderFilterCalc(input);
+        final output = lowPassFilterCalc(input);
 
         _filterChartData.add(FilterChartData(_timeSec, input, output));
         if (_filterChartData.length > _dataPointMaxNumber) {
@@ -72,7 +72,7 @@ class _FirstOrderFilterState extends State<FirstOrderFilter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Index 01: First Order Filter"),
+        title: const Text("Index 01: Low Pass Filter"),
         backgroundColor: widget.appBarColor,
       ),
       body: Center(
@@ -213,8 +213,8 @@ class _FirstOrderFilterState extends State<FirstOrderFilter> {
           onChanged: (dynamic newValue) {
             setState(() {
               _cutOffFreqHz = newValue;
-              firstOrderFilterSetParams(_cutOffFreqHz, 0.0);
-              _timeConstantSec = firstOrderFilterGetParams()[1];
+              lowPassFilterSetParams(_cutOffFreqHz, 0.0);
+              _timeConstantSec = lowPassFilterGetParams()[1];
             });
           },
         ),
@@ -244,8 +244,8 @@ class _FirstOrderFilterState extends State<FirstOrderFilter> {
           onChanged: (dynamic newValue) {
             setState(() {
               _timeConstantSec = newValue;
-              firstOrderFilterSetParams(0.0, _timeConstantSec);
-              _cutOffFreqHz = firstOrderFilterGetParams()[0];
+              lowPassFilterSetParams(0.0, _timeConstantSec);
+              _cutOffFreqHz = lowPassFilterGetParams()[0];
             });
           },
         ),

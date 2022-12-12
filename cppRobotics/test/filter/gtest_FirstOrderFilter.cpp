@@ -1,8 +1,8 @@
-#include "../../src/filter/FirstOrderFilter.h"
+#include "../../src/filter/LowPassFilter.h"
 #include <gtest/gtest.h>
 #include <unordered_map>
 
-auto RunFilter(int loopHz, FirstOrderFilter<double> &filter,
+auto RunFilter(int loopHz, LowPassFilter<double> &filter,
                double durationTimeSec, double targetValue) {
   auto settlingTimeSec = 1'000'000.0;
   auto settlingTimeCriterion = 0.02; // 98%
@@ -33,11 +33,11 @@ auto RunFilter(int loopHz, FirstOrderFilter<double> &filter,
   return result;
 }
 
-TEST(FirstOrderFilterTestSuite, resetTestCase) {
+TEST(LowPassFilterTestSuite, resetTestCase) {
   auto loopHz = 50;
   auto timeConstantSec = 0.1;
-  auto config = FirstOrderFilterConfig(0.0, timeConstantSec);
-  FirstOrderFilter<double> filter(loopHz);
+  auto config = LowPassFilterConfig(0.0, timeConstantSec);
+  LowPassFilter<double> filter(loopHz);
   filter.SetParams(config);
 
   EXPECT_THROW(
@@ -50,11 +50,11 @@ TEST(FirstOrderFilterTestSuite, resetTestCase) {
       std::runtime_error);
 }
 
-TEST(FirstOrderFilterTestSuite, cteConvergeTestCase) {
+TEST(LowPassFilterTestSuite, cteConvergeTestCase) {
   auto loopHz = 50;
   auto timeConstantSec = 0.1;
-  auto config = FirstOrderFilterConfig(0.0, timeConstantSec);
-  FirstOrderFilter<double> filter(loopHz);
+  auto config = LowPassFilterConfig(0.0, timeConstantSec);
+  LowPassFilter<double> filter(loopHz);
   filter.SetParams(config);
 
   auto durationTimeSec = 1.0;

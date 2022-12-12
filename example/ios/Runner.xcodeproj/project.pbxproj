@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
-		4E7E03DD293D6B6500D6628C /* cpp_add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E03DB293D6B6400D6628C /* cpp_add.cpp */; };
+		4EE767152946EBE600D80F09 /* LowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EE767142946EBE600D80F09 /* LowPassFilter.cpp */; };
+		4EE767192946EC3100D80F09 /* cpp_add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EE767172946EC3100D80F09 /* cpp_add.cpp */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -35,8 +36,11 @@
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		44AE06763198EC3DEFB18B91 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
-		4E7E03DB293D6B6400D6628C /* cpp_add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cpp_add.cpp; path = ../../../../cppRobotics/src/cpp_add.cpp; sourceTree = "<group>"; };
-		4E7E03DC293D6B6500D6628C /* cpp_add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpp_add.h; path = ../../../../cppRobotics/src/cpp_add.h; sourceTree = "<group>"; };
+		4EE767132946EBE600D80F09 /* LowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LowPassFilter.h; path = ../../../../../cppRobotics/extern/filter/LowPassFilter.h; sourceTree = "<group>"; };
+		4EE767142946EBE600D80F09 /* LowPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LowPassFilter.cpp; path = ../../../../../cppRobotics/extern/filter/LowPassFilter.cpp; sourceTree = "<group>"; };
+		4EE767162946EBF600D80F09 /* CppRobotics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CppRobotics.h; path = ../../../../cppRobotics/extern/CppRobotics.h; sourceTree = "<group>"; };
+		4EE767172946EC3100D80F09 /* cpp_add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cpp_add.cpp; path = ../../../../cppRobotics/src/cpp_add.cpp; sourceTree = "<group>"; };
+		4EE767182946EC3100D80F09 /* cpp_add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpp_add.h; path = ../../../../cppRobotics/src/cpp_add.h; sourceTree = "<group>"; };
 		635D3093FA7E198AEBD4F63C /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +71,7 @@
 		4EA5BF77293038C500BB470D /* cppRobotics */ = {
 			isa = PBXGroup;
 			children = (
+				4EE767112946EBCD00D80F09 /* extern */,
 				4EE019A22934527F0006FF27 /* src */,
 			);
 			path = cppRobotics;
@@ -75,10 +80,28 @@
 		4EE019A22934527F0006FF27 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				4E7E03DB293D6B6400D6628C /* cpp_add.cpp */,
-				4E7E03DC293D6B6500D6628C /* cpp_add.h */,
+				4EE767172946EC3100D80F09 /* cpp_add.cpp */,
+				4EE767182946EC3100D80F09 /* cpp_add.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		4EE767112946EBCD00D80F09 /* extern */ = {
+			isa = PBXGroup;
+			children = (
+				4EE767162946EBF600D80F09 /* CppRobotics.h */,
+				4EE767122946EBD600D80F09 /* filter */,
+			);
+			path = extern;
+			sourceTree = "<group>";
+		};
+		4EE767122946EBD600D80F09 /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				4EE767142946EBE600D80F09 /* LowPassFilter.cpp */,
+				4EE767132946EBE600D80F09 /* LowPassFilter.h */,
+			);
+			path = filter;
 			sourceTree = "<group>";
 		};
 		92134E57F42AAA0BBEAD3571 /* Pods */ = {
@@ -292,7 +315,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E7E03DD293D6B6500D6628C /* cpp_add.cpp in Sources */,
+				4EE767192946EC3100D80F09 /* cpp_add.cpp in Sources */,
+				4EE767152946EBE600D80F09 /* LowPassFilter.cpp in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);

@@ -23,8 +23,8 @@ class Methods extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (itemKey) {
-      case FilterItem.firstOrderFilter:
-        return FirstOrderFilter(appBarColor: appBarColor);
+      case FilterItem.lowPassFilter:
+        return LowPassFilter(appBarColor: appBarColor);
       case FilterItem.secondOrderFilter:
         return Scaffold(
           appBar: AppBar(
