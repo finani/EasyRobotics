@@ -11,7 +11,7 @@ set(CPP_ROBOTICS_SRCS
 )
 
 set(CPP_ROBOTICS_EXTERNS
-	extern/filter/FirstOrderFilter.cpp
+	extern/filter/LowPassFilter.cpp
 )
 
 add_library(cpp_robotics_library SHARED

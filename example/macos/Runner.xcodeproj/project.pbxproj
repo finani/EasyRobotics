@@ -27,8 +27,8 @@
 		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
-		4E65D60C2943084800477951 /* FirstOrderFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E65D60B2943084800477951 /* FirstOrderFilter.cpp */; };
 		4E7E03E0293D6B7700D6628C /* cpp_add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E03DF293D6B7600D6628C /* cpp_add.cpp */; };
+		4EE767102946EBA700D80F09 /* LowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EE7670E2946EBA700D80F09 /* LowPassFilter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,10 +70,10 @@
 		33E51914231749380026EE4D /* Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
 		4E65D6092943082C00477951 /* CppRobotics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CppRobotics.h; path = ../../../../../../cppRobotics/extern/CppRobotics.h; sourceTree = "<group>"; };
-		4E65D60A2943084800477951 /* FirstOrderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstOrderFilter.h; path = ../../../../../../../cppRobotics/extern/filter/FirstOrderFilter.h; sourceTree = "<group>"; };
-		4E65D60B2943084800477951 /* FirstOrderFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FirstOrderFilter.cpp; path = ../../../../../../../cppRobotics/extern/filter/FirstOrderFilter.cpp; sourceTree = "<group>"; };
 		4E7E03DE293D6B7600D6628C /* cpp_add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpp_add.h; path = ../../../../cppRobotics/src/cpp_add.h; sourceTree = "<group>"; };
 		4E7E03DF293D6B7600D6628C /* cpp_add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cpp_add.cpp; path = ../../../../cppRobotics/src/cpp_add.cpp; sourceTree = "<group>"; };
+		4EE7670E2946EBA700D80F09 /* LowPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LowPassFilter.cpp; path = ../../../../../../../cppRobotics/extern/filter/LowPassFilter.cpp; sourceTree = "<group>"; };
+		4EE7670F2946EBA700D80F09 /* LowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LowPassFilter.h; path = ../../../../../../../cppRobotics/extern/filter/LowPassFilter.h; sourceTree = "<group>"; };
 		5A9F62E2170FE00E02F601B8 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		6652E0417850301CC7577801 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -173,8 +173,8 @@
 		4E65D6072943080300477951 /* filter */ = {
 			isa = PBXGroup;
 			children = (
-				4E65D60B2943084800477951 /* FirstOrderFilter.cpp */,
-				4E65D60A2943084800477951 /* FirstOrderFilter.h */,
+				4EE7670E2946EBA700D80F09 /* LowPassFilter.cpp */,
+				4EE7670F2946EBA700D80F09 /* LowPassFilter.h */,
 			);
 			name = filter;
 			path = ../cppRobotics/extern/filter;
@@ -384,9 +384,9 @@
 			files = (
 				33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */,
 				33CC10F12044A3C60003C045 /* AppDelegate.swift in Sources */,
-				4E65D60C2943084800477951 /* FirstOrderFilter.cpp in Sources */,
 				335BBD1B22A9A15E00E9071D /* GeneratedPluginRegistrant.swift in Sources */,
 				4E7E03E0293D6B7700D6628C /* cpp_add.cpp in Sources */,
+				4EE767102946EBA700D80F09 /* LowPassFilter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
