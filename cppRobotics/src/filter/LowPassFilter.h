@@ -5,15 +5,17 @@
 
 #include <stdexcept>
 
-#include "LowPassFilterConfig.h"
 #include "IFilter.h"
+#include "LowPassFilterConfig.h"
+
+// https://en.wikipedia.org/wiki/Low-pass_filter
 
 template <typename T>
 class LowPassFilter : public IFilter<T, LowPassFilterConfig> {
 public:
   explicit LowPassFilter(int hz)
-      : hz_(hz), isSetParams_(false), lowPassFilterConfig_(0, 0),
-        prevOutput_(){};
+      : dt_(1.0 / hz), alpha_(0.0), isSetParams_(false),
+        lowPassFilterConfig_(0.0, 0.0), prevOutput_(){};
   ~LowPassFilter() = default;
 
   LowPassFilter(const LowPassFilter &other) = default;
@@ -24,10 +26,7 @@ public:
 
   T Calc(const T &curInput) override {
     if (isSetParams_ == true) {
-      double iRC =
-          2.0 * M_PI * lowPassFilterConfig_.cutOffFreqHz * (1.0 / hz_);
-      double alpha = iRC / (iRC + 1.0);
-      T curOutput = curInput * alpha + prevOutput_ * (1.0 - alpha);
+      T curOutput = alpha_ * curInput + (1.0 - alpha_) * prevOutput_;
       prevOutput_ = curOutput;
       return curOutput;
     } else {
@@ -40,9 +39,7 @@ public:
     return Calc(curInput);
   }
 
-  LowPassFilterConfig GetParams() override {
-    return lowPassFilterConfig_;
-  }
+  LowPassFilterConfig GetParams() override { return lowPassFilterConfig_; }
 
   void SetParams(const LowPassFilterConfig &config) override {
     lowPassFilterConfig_ = config;
@@ -56,11 +53,15 @@ public:
       lowPassFilterConfig_.timeConstantSec =
           1.0 / (2.0 * M_PI * lowPassFilterConfig_.cutOffFreqHz);
     }
+
+    double dtOverRc = dt_ * 2.0 * M_PI * lowPassFilterConfig_.cutOffFreqHz;
+    alpha_ = dtOverRc / (1.0 + dtOverRc);
     isSetParams_ = CheckFilterValid();
   }
 
   void ResetFilter() override {
-    lowPassFilterConfig_ = {0, 0};
+    lowPassFilterConfig_ = {0.0, 0.0};
+    alpha_ = 0.0;
     isSetParams_ = false;
     ResetPrevValues();
   }
@@ -80,7 +81,8 @@ private:
     }
   }
 
-  int hz_;
+  double dt_;
+  double alpha_;
 
   bool isSetParams_;
   LowPassFilterConfig lowPassFilterConfig_;
