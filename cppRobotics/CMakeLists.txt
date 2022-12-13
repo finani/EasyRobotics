@@ -28,7 +28,7 @@ target_link_libraries(cpp_robotics
 )
 
 set_target_properties(cpp_robotics_library PROPERTIES
-    PUBLIC_HEADER extern/CppRobotics.h
+    # PUBLIC_HEADER extern/CppRobotics.h
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
     OUTPUT_NAME "cpp_robotics"
