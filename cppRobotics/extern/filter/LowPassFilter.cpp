@@ -8,14 +8,14 @@ double LowPassFilterCalc(double curInput) {
 }
 
 double* LowPassFilterGetParams() {
-  LowPassFilterConfig config = lowPassFilter.GetParams();
+  FirstOrderFilterConfig config = lowPassFilter.GetParams();
   params[0] = config.cutOffFreqHz;
   params[1] = config.timeConstantSec;
   return params;
 }
 
 void LowPassFilterSetParams(double cutOffFreqHz, double timeConstantSec) {
-  LowPassFilterConfig config = {cutOffFreqHz, timeConstantSec};
+  FirstOrderFilterConfig config = {cutOffFreqHz, timeConstantSec};
   lowPassFilter.SetParams(config);
 }
 

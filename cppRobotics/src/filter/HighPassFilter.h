@@ -1,5 +1,5 @@
-#ifndef FILTER_LOW_PASS_FILTER_H
-#define FILTER_LOW_PASS_FILTER_H
+#ifndef FILTER_HIGH_PASS_FILTER_H
+#define FILTER_HIGH_PASS_FILTER_H
 
 #include <math.h>
 
@@ -8,29 +8,31 @@
 #include "FirstOrderFilterConfig.h"
 #include "IFilter.h"
 
-// https://en.wikipedia.org/wiki/Low-pass_filter
+// https://en.wikipedia.org/wiki/High-pass_filter
 
 template <typename T>
-class LowPassFilter : public IFilter<T, FirstOrderFilterConfig> {
+class HighPassFilter : public IFilter<T, FirstOrderFilterConfig> {
 public:
-  explicit LowPassFilter(int hz)
+  explicit HighPassFilter(int hz)
       : dt_(1.0 / hz), alpha_(0.0), isSetParams_(false),
-        lowPassFilterConfig_(0.0, 0.0), prevOutput_(){};
-  ~LowPassFilter() = default;
+        lowPassFilterConfig_(0.0, 0.0), prevInput_(), prevOutput_(){};
+  ~HighPassFilter() = default;
 
-  LowPassFilter(const LowPassFilter &other) = default;
-  LowPassFilter &operator=(const LowPassFilter &other) = default;
+  HighPassFilter(const HighPassFilter &other) = default;
+  HighPassFilter &operator=(const HighPassFilter &other) = default;
 
-  LowPassFilter(LowPassFilter &&other) = default;
-  LowPassFilter &operator=(LowPassFilter &&other) = default;
+  HighPassFilter(HighPassFilter &&other) = default;
+  HighPassFilter &operator=(HighPassFilter &&other) = default;
 
   T Calc(const T &curInput) override {
     if (isSetParams_ == true) {
-      T curOutput = alpha_ * curInput + (1.0 - alpha_) * prevOutput_;
+      T curOutput =
+          alpha_ * prevOutput_ + (1.0 - alpha_) * (curInput - prevInput_);
+      prevInput_ = curInput;
       prevOutput_ = curOutput;
       return curOutput;
     } else {
-      throw std::runtime_error("LowPassFilter::Calc: Params are not set.");
+      throw std::runtime_error("HighPassFilter::Calc: Params are not set.");
     }
   }
 
@@ -55,7 +57,7 @@ public:
     }
 
     double dtOverRc = dt_ * 2.0 * M_PI * lowPassFilterConfig_.cutOffFreqHz;
-    alpha_ = dtOverRc / (1.0 + dtOverRc);
+    alpha_ = 1.0 / (1.0 + dtOverRc);
     isSetParams_ = CheckFilterValid();
   }
 
@@ -85,10 +87,10 @@ private:
   double alpha_;
 
   bool isSetParams_;
-
   FirstOrderFilterConfig lowPassFilterConfig_;
 
+  T prevInput_;
   T prevOutput_;
 };
 
-#endif // !FILTER_LOW_PASS_FILTER_H
+#endif // !FILTER_HIGH_PASS_FILTER_H
