@@ -1,5 +1,6 @@
 enum FilterItem {
   lowPassFilter,
+  highPassFilter,
   secondOrderFilter;
 
   @override
@@ -7,6 +8,8 @@ enum FilterItem {
     switch (this) {
       case FilterItem.lowPassFilter:
         return 'Low Pass Filter';
+      case FilterItem.highPassFilter:
+        return 'High Pass Filter';
       case FilterItem.secondOrderFilter:
         return 'Second Order Filter';
       default:
@@ -17,6 +20,7 @@ enum FilterItem {
   static List<FilterItem> getFilterItemList() {
     return [
       FilterItem.lowPassFilter,
+      FilterItem.highPassFilter,
       FilterItem.secondOrderFilter,
     ];
   }

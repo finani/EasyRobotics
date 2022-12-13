@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:easy_robotics/src/data/common_types.dart';
 import 'package:easy_robotics/src/layouts/tab_navigator_routes.dart';
 import 'package:easy_robotics/src/pages/filter/filter_item.dart';
-import 'package:easy_robotics/src/pages/filter/first_order_filter.dart';
+import 'package:easy_robotics/src/pages/filter/high_pass_filter.dart';
+import 'package:easy_robotics/src/pages/filter/low_pass_filter.dart';
 import 'package:easy_robotics/src/widgets/item_card.dart';
 
 class Methods extends StatelessWidget {
@@ -25,6 +26,8 @@ class Methods extends StatelessWidget {
     switch (itemKey) {
       case FilterItem.lowPassFilter:
         return LowPassFilter(appBarColor: appBarColor);
+      case FilterItem.highPassFilter:
+        return HighPassFilter(appBarColor: appBarColor);
       case FilterItem.secondOrderFilter:
         return Scaffold(
           appBar: AppBar(
