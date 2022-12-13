@@ -1,7 +1,7 @@
 import '../native_cpp.dart';
 import 'dart:ffi'; // For FFI
 
-/// T curOutput = curInput * alpha + prevOutput_ * (1.0 - alpha);
+/// T curOutput = alpha_ * curInput + (1.0 - alpha_) * prevOutput_;
 final double Function(double curInput) lowPassFilterCalc = cppRoboticsLib
     .lookup<NativeFunction<Double Function(Double)>>('LowPassFilterCalc')
     .asFunction();
