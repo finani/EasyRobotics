@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ffi';
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:easy_robotics/src/data/filter_chart_data.dart';
@@ -26,14 +27,20 @@ class _LowPassFilterState extends State<LowPassFilter> {
   final List<FilterChartData> _filterChartData = [];
   final _dataPointMaxNumber = 50;
 
-  double _timeConstantSec = 0.2;
+  double _timeConstantSec = 0.02;
   late double _cutOffFreqHz;
 
   late double _timeSec;
   final _stepTimeMillisecond = 100;
 
-  double _inputValue = 0.8;
-  double _newInputValue = 0.8;
+  double _dcInput = 0.0;
+  double _newDcInput = 0.0;
+
+  double _amplitude = 0.0;
+  double _newAmplitude = 0.0;
+
+  double _frequency = 0.2;
+  double _newFrequency = 0.2;
 
   @override
   void initState() {
@@ -48,7 +55,8 @@ class _LowPassFilterState extends State<LowPassFilter> {
     timer_ =
         Timer.periodic(Duration(milliseconds: _stepTimeMillisecond), (timer) {
       setState(() {
-        final input = _inputValue;
+        final input =
+            _dcInput + _amplitude * sin(2 * pi * _frequency * _timeSec);
         final output = lowPassFilterCalc(input);
 
         _filterChartData.add(FilterChartData(_timeSec, input, output));
@@ -90,8 +98,17 @@ class _LowPassFilterState extends State<LowPassFilter> {
                 ]),
                 const Spacer(),
                 Column(children: [
-                  const Text("Input Value"),
-                  _buildInputValueVerticalSlider(),
+                  const Text("DC Input"),
+                  _buildDcInputVerticalSlider(),
+                ]),
+                const Spacer(),
+                Column(children: [
+                  const Text("Sine Amp"),
+                  _buildSineAmplitudeVerticalSlider(),
+                ]),
+                Column(children: [
+                  const Text("Sine Freq [hz]"),
+                  _buildSineFrequencyVerticalSlider(),
                 ]),
                 const Spacer(flex: 10),
               ],
@@ -128,8 +145,8 @@ class _LowPassFilterState extends State<LowPassFilter> {
       primaryYAxis: NumericAxis(
         majorTickLines: const MajorTickLines(color: Colors.transparent),
         axisLine: const AxisLine(width: 0),
-        minimum: 0,
-        maximum: 1,
+        minimum: -2,
+        maximum: 2,
       ),
       legend: Legend(
         isVisible: true,
@@ -157,7 +174,41 @@ class _LowPassFilterState extends State<LowPassFilter> {
     ];
   }
 
-  Widget _buildInputValueVerticalSlider() {
+  Widget _buildDcInputVerticalSlider() {
+    return SizedBox(
+      width: 100,
+      height: 300,
+      child: SfSliderTheme(
+        data: SfSliderThemeData(
+          thumbRadius: 0,
+          overlayRadius: 10,
+          overlayColor: Colors.blue,
+        ),
+        child: SfSlider.vertical(
+          min: -1.0,
+          max: 1.0,
+          interval: 0.2,
+          showTicks: true,
+          showLabels: true,
+          enableTooltip: true,
+          minorTicksPerInterval: 1,
+          value: _newDcInput,
+          onChanged: (dynamic newValue) {
+            setState(() {
+              _newDcInput = newValue;
+            });
+          },
+          onChangeEnd: (dynamic newValue) {
+            setState(() {
+              _dcInput = _newDcInput;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSineAmplitudeVerticalSlider() {
     return SizedBox(
       width: 100,
       height: 300,
@@ -175,15 +226,49 @@ class _LowPassFilterState extends State<LowPassFilter> {
           showLabels: true,
           enableTooltip: true,
           minorTicksPerInterval: 1,
-          value: _newInputValue,
+          value: _newAmplitude,
           onChanged: (dynamic newValue) {
             setState(() {
-              _newInputValue = newValue;
+              _newAmplitude = newValue;
             });
           },
           onChangeEnd: (dynamic newValue) {
             setState(() {
-              _inputValue = _newInputValue;
+              _amplitude = _newAmplitude;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSineFrequencyVerticalSlider() {
+    return SizedBox(
+      width: 100,
+      height: 300,
+      child: SfSliderTheme(
+        data: SfSliderThemeData(
+          thumbRadius: 0,
+          overlayRadius: 10,
+          overlayColor: Colors.blue,
+        ),
+        child: SfSlider.vertical(
+          min: 0.2,
+          max: 1.0,
+          interval: 0.2,
+          showTicks: true,
+          showLabels: true,
+          enableTooltip: true,
+          minorTicksPerInterval: 1,
+          value: _newFrequency,
+          onChanged: (dynamic newValue) {
+            setState(() {
+              _newFrequency = newValue;
+            });
+          },
+          onChangeEnd: (dynamic newValue) {
+            setState(() {
+              _frequency = _newFrequency;
             });
           },
         ),
@@ -202,9 +287,9 @@ class _LowPassFilterState extends State<LowPassFilter> {
           overlayColor: Colors.blue,
         ),
         child: SfSlider(
-          min: 0.2,
-          max: 0.8,
-          interval: 0.2,
+          min: 0.0,
+          max: 8.0,
+          interval: 2.0,
           showTicks: true,
           showLabels: true,
           enableTooltip: true,
@@ -212,6 +297,7 @@ class _LowPassFilterState extends State<LowPassFilter> {
           value: _cutOffFreqHz,
           onChanged: (dynamic newValue) {
             setState(() {
+              if (newValue < 0.08) newValue = 0.08;
               _cutOffFreqHz = newValue;
               lowPassFilterSetParams(_cutOffFreqHz, 0.0);
               _timeConstantSec = lowPassFilterGetParams()[1];
@@ -233,9 +319,9 @@ class _LowPassFilterState extends State<LowPassFilter> {
           overlayColor: Colors.blue,
         ),
         child: SfSlider(
-          min: 0.2,
-          max: 0.8,
-          interval: 0.2,
+          min: 0.0,
+          max: 2.0,
+          interval: 0.5,
           showTicks: true,
           showLabels: true,
           enableTooltip: true,
@@ -243,6 +329,7 @@ class _LowPassFilterState extends State<LowPassFilter> {
           value: _timeConstantSec,
           onChanged: (dynamic newValue) {
             setState(() {
+              if (newValue < 0.02) newValue = 0.02;
               _timeConstantSec = newValue;
               lowPassFilterSetParams(0.0, _timeConstantSec);
               _cutOffFreqHz = lowPassFilterGetParams()[0];
