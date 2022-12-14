@@ -36,11 +36,11 @@ class _HighPassFilterState extends State<HighPassFilter> {
   double _dcInput = 0.0;
   double _newDcInput = 0.0;
 
-  double _amplitude = 0.0;
-  double _newAmplitude = 0.0;
+  double _sineAmplitude = 0.0;
+  double _newSineAmplitude = 0.0;
 
-  double _frequency = 0.2;
-  double _newFrequency = 0.2;
+  double _sineFrequency = 0.2;
+  double _newSineFrequency = 0.2;
 
   @override
   void initState() {
@@ -56,7 +56,7 @@ class _HighPassFilterState extends State<HighPassFilter> {
         Timer.periodic(Duration(milliseconds: _stepTimeMillisecond), (timer) {
       setState(() {
         final input =
-            _dcInput + _amplitude * sin(2 * pi * _frequency * _timeSec);
+            _dcInput + _sineAmplitude * sin(2 * pi * _sineFrequency * _timeSec);
         final output = highPassFilterCalc(input);
 
         _filterChartData.add(FilterChartData(_timeSec, input, output));
@@ -226,15 +226,15 @@ class _HighPassFilterState extends State<HighPassFilter> {
           showLabels: true,
           enableTooltip: true,
           minorTicksPerInterval: 1,
-          value: _newAmplitude,
+          value: _newSineAmplitude,
           onChanged: (dynamic newValue) {
             setState(() {
-              _newAmplitude = newValue;
+              _newSineAmplitude = newValue;
             });
           },
           onChangeEnd: (dynamic newValue) {
             setState(() {
-              _amplitude = _newAmplitude;
+              _sineAmplitude = _newSineAmplitude;
             });
           },
         ),
@@ -260,15 +260,15 @@ class _HighPassFilterState extends State<HighPassFilter> {
           showLabels: true,
           enableTooltip: true,
           minorTicksPerInterval: 1,
-          value: _newFrequency,
+          value: _newSineFrequency,
           onChanged: (dynamic newValue) {
             setState(() {
-              _newFrequency = newValue;
+              _newSineFrequency = newValue;
             });
           },
           onChangeEnd: (dynamic newValue) {
             setState(() {
-              _frequency = _newFrequency;
+              _sineFrequency = _newSineFrequency;
             });
           },
         ),
