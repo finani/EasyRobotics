@@ -7,13 +7,12 @@
 
 #include "IGuidance.h"
 #include "ProportionalNavigationConfig.h"
-#include "PureProportionalNavigationInputData.h"
+#include "PureProportionalNavigationData.h"
 
 // https://en.wikipedia.org/wiki/Proportional_navigation
 
-class ProportionalNavigation
-    : public IGuidance<PureProportionalNavigationInputData,
-                       ProportionalNavigationConfig> {
+class ProportionalNavigation : public IGuidance<PureProportionalNavigationData,
+                                                ProportionalNavigationConfig> {
 public:
   explicit ProportionalNavigation(int hz)
       : hz_(hz), isSetParams_(false), proportionalNavigationConfig_(0.0),
@@ -28,7 +27,7 @@ public:
   ProportionalNavigation &operator=(ProportionalNavigation &&other) = default;
 
   double
-  CalcAccCmd(const PureProportionalNavigationInputData &curInputData) override {
+  CalcAccCmd(const PureProportionalNavigationData &curInputData) override {
     if (isSetParams_ == true) {
       std::array<double, 3> curToTargetVector = {
           curInputData.targetPos[0] - curInputData.curPos[0],
@@ -69,6 +68,16 @@ public:
   void SetParams(const ProportionalNavigationConfig &config) override {
     proportionalNavigationConfig_ = config;
     isSetParams_ = CheckFilterValid();
+  }
+
+  void SetPrevData(const PureProportionalNavigationData &prevData) {
+    prevToTargetVector_[0] = prevData.targetPos[0] - prevData.curPos[0];
+    prevToTargetVector_[1] = prevData.targetPos[1] - prevData.curPos[1];
+    prevToTargetVector_[2] = prevData.targetPos[2] - prevData.curPos[2];
+    prevToTargetVectorNorm_ =
+        std::sqrt(prevToTargetVector_[0] * prevToTargetVector_[0] +
+                  prevToTargetVector_[1] * prevToTargetVector_[1] +
+                  prevToTargetVector_[2] * prevToTargetVector_[2]);
   }
 
 private:
