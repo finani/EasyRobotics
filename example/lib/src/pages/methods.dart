@@ -5,6 +5,8 @@ import 'package:easy_robotics/src/layouts/tab_navigator_routes.dart';
 import 'package:easy_robotics/src/pages/filter/filter_item.dart';
 import 'package:easy_robotics/src/pages/filter/high_pass_filter.dart';
 import 'package:easy_robotics/src/pages/filter/low_pass_filter.dart';
+import 'package:easy_robotics/src/pages/guidance/guidance_item.dart';
+import 'package:easy_robotics/src/pages/guidance/pure_proportional_navigation.dart';
 import 'package:easy_robotics/src/widgets/item_card.dart';
 
 class Methods extends StatelessWidget {
@@ -38,6 +40,8 @@ class Methods extends StatelessWidget {
             child: CircularProgressIndicator(),
           ),
         );
+      case GuidanceItem.pureProportionalNavigation:
+        return PureProportionalNavigation(appBarColor: appBarColor);
       default:
         switch (route) {
           case TabNavigatorRoutes.filter:
@@ -61,6 +65,34 @@ class Methods extends StatelessWidget {
                     context,
                     route: route,
                     itemKey: FilterItem.getFilterItemList()[index],
+                    onPush: onPush,
+                    cardHeightRatio: 0.2,
+                    cardWidthRatio: 0.2,
+                  );
+                },
+              ),
+            );
+          case TabNavigatorRoutes.guidance:
+            return Scaffold(
+              appBar: AppBar(
+                title: Text("Index 00: Methods ($route)"),
+                backgroundColor: appBarColor,
+              ),
+              body: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: 4 / 3,
+                ),
+                itemCount: GuidanceItem.getGuidanceItemList().length,
+                itemBuilder: (context, index) {
+                  return buildItemCard(
+                    context,
+                    route: route,
+                    itemKey: GuidanceItem.getGuidanceItemList()[index],
                     onPush: onPush,
                     cardHeightRatio: 0.2,
                     cardWidthRatio: 0.2,
