@@ -1,8 +1,7 @@
 #ifndef FILTER_HIGH_PASS_FILTER_H
 #define FILTER_HIGH_PASS_FILTER_H
 
-#include <math.h>
-
+#include <cmath>
 #include <stdexcept>
 
 #include "FirstOrderFilterConfig.h"

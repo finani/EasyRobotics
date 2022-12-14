@@ -1,9 +1,7 @@
 #ifndef GUIDANCE_PROPORTIONAL_NAVIGATION_H
 #define GUIDANCE_PROPORTIONAL_NAVIGATION_H
 
-#include <math.h>
-
-#include <stdexcept>
+#include <cmath>
 
 #include "IGuidance.h"
 #include "ProportionalNavigationConfig.h"
