@@ -7,9 +7,8 @@ struct PureProportionalNavigationInputData {
   std::array<double, 3> curPos;
   std::array<double, 3> targetPos;
 
-  explicit PureProportionalNavigationInputData(
-      const std::array<double, 3> &curPos,
-      const std::array<double, 3> &targetPos)
+  PureProportionalNavigationInputData(const std::array<double, 3> &curPos,
+                                      const std::array<double, 3> &targetPos)
       : curPos(curPos), targetPos(targetPos) {}
 };
 

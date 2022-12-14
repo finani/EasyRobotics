@@ -1,7 +1,7 @@
 #include "LowPassFilter.h"
 
 static LowPassFilter<double> lowPassFilter(50);
-static double params[2];
+static double pParams[2];
 
 double LowPassFilterCalc(double curInput) {
   return lowPassFilter.Calc(curInput);
@@ -9,9 +9,9 @@ double LowPassFilterCalc(double curInput) {
 
 double* LowPassFilterGetParams() {
   FirstOrderFilterConfig config = lowPassFilter.GetParams();
-  params[0] = config.cutOffFreqHz;
-  params[1] = config.timeConstantSec;
-  return params;
+  pParams[0] = config.cutOffFreqHz;
+  pParams[1] = config.timeConstantSec;
+  return pParams;
 }
 
 void LowPassFilterSetParams(double cutOffFreqHz, double timeConstantSec) {
