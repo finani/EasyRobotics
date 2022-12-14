@@ -33,8 +33,8 @@ class _PureProportionalNavigationState
   final Pointer<Double> _pTargetPosition =
       calloc.allocate(sizeOf<Double>() * 3);
 
-  var currentPosition = Cartesian2dData(0.0, 0.0);
-  var targetPosition = Cartesian2dData(50.0, 50.0);
+  var currentPosition = Cartesian2dData(-20.0, -20.0);
+  var targetPosition = Cartesian2dData(20.0, 20.0);
 
   var currentVelocity = Cartesian2dData(0.0, 10.0);
   final targetVelocity = Cartesian2dData(0.0, 0.0);
@@ -43,7 +43,7 @@ class _PureProportionalNavigationState
   final List<Cartesian2dData> _targetPositionData = [];
   final _dataPointMaxNumber = 100;
 
-  double _n = 3.0;
+  double _n = 4.0;
 
   final _stepTimeMillisecond = 100;
 
@@ -192,8 +192,9 @@ class _PureProportionalNavigationState
     final chart2dNumericAxis = NumericAxis(
       majorTickLines: const MajorTickLines(color: Colors.transparent),
       axisLine: const AxisLine(width: 0),
-      minimum: -10.0,
-      maximum: 60.0,
+      minimum: -30.0,
+      maximum: 30.0,
+      minorTicksPerInterval: 1,
     );
 
     return SfCartesianChart(
