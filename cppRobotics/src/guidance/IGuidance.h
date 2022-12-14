@@ -7,7 +7,7 @@ public:
   ~IGuidance() = default;
 
   virtual double CalcAccCmd(const InputData &curInputData) = 0;
-  virtual double CalcAccCmd(const double losRate) = 0;
+  virtual double CalcAccCmdFromLosRate(double losRate) = 0;
   virtual Config GetParams() = 0;
   virtual void SetParams(const Config &config) = 0;
 

@@ -57,7 +57,7 @@ public:
     }
   }
 
-  double CalcAccCmd(double losRate) override {
+  double CalcAccCmdFromLosRate(double losRate) override {
     double accCmd = proportionalNavigationConfig_.n * losRate;
     return accCmd;
   }
