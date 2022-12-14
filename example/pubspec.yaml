@@ -35,6 +35,7 @@ dependencies:
   syncfusion_flutter_sliders: ^20.3.60
   syncfusion_flutter_core: ^20.3.60
   qr_flutter: ^4.0.0
+  ffi: ^2.0.1
 
 dev_dependencies:
   flutter_test:

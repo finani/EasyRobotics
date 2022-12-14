@@ -16,10 +16,8 @@ final Pointer<Double> Function() lowPassFilterGetParams = cppRoboticsLib
 
 final void Function(double cutOffFreqHz, double timeConstantSec)
     lowPassFilterSetParams = cppRoboticsLib
-        .lookup<
-            NativeFunction<
-                Void Function(Double cutOffFreqHz,
-                    Double timeConstantSec)>>('LowPassFilterSetParams')
+        .lookup<NativeFunction<Void Function(Double, Double)>>(
+            'LowPassFilterSetParams')
         .asFunction();
 
 final void Function() lowPassFilterResetFilter = cppRoboticsLib

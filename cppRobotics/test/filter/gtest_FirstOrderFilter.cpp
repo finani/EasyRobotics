@@ -36,7 +36,7 @@ auto RunFilter(int loopHz, LowPassFilter<double> &filter,
 TEST(LowPassFilterTestSuite, resetTestCase) {
   auto loopHz = 50;
   auto timeConstantSec = 0.1;
-  auto config = LowPassFilterConfig(0.0, timeConstantSec);
+  auto config = FirstOrderFilterConfig(0.0, timeConstantSec);
   LowPassFilter<double> filter(loopHz);
   filter.SetParams(config);
 
@@ -53,7 +53,7 @@ TEST(LowPassFilterTestSuite, resetTestCase) {
 TEST(LowPassFilterTestSuite, cteConvergeTestCase) {
   auto loopHz = 50;
   auto timeConstantSec = 0.1;
-  auto config = LowPassFilterConfig(0.0, timeConstantSec);
+  auto config = FirstOrderFilterConfig(0.0, timeConstantSec);
   LowPassFilter<double> filter(loopHz);
   filter.SetParams(config);
 
