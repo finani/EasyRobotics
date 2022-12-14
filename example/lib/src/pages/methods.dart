@@ -33,7 +33,7 @@ class Methods extends StatelessWidget {
       case FilterItem.secondOrderFilter:
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Index 02: Second Order Filter"),
+            title: const Text("Index 03: Second Order Filter"),
             backgroundColor: appBarColor,
           ),
           body: const Center(
@@ -42,6 +42,26 @@ class Methods extends StatelessWidget {
         );
       case GuidanceItem.pureProportionalNavigation:
         return PureProportionalNavigation(appBarColor: appBarColor);
+      case GuidanceItem.trueProportionalNavigation:
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Index 12: True Proportional Navigation"),
+            backgroundColor: appBarColor,
+          ),
+          body: const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      case GuidanceItem.augmentedProportionalNavigation:
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Index 13: Augmented Proportional Navigation"),
+            backgroundColor: appBarColor,
+          ),
+          body: const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       default:
         switch (route) {
           case TabNavigatorRoutes.filter:
@@ -75,7 +95,7 @@ class Methods extends StatelessWidget {
           case TabNavigatorRoutes.guidance:
             return Scaffold(
               appBar: AppBar(
-                title: Text("Index 00: Methods ($route)"),
+                title: Text("Index 10: Methods ($route)"),
                 backgroundColor: appBarColor,
               ),
               body: GridView.builder(
@@ -103,7 +123,7 @@ class Methods extends StatelessWidget {
           default:
             return Scaffold(
               appBar: AppBar(
-                title: const Text("Index 00: Unknown Methods"),
+                title: const Text("Index --: Unknown Methods"),
                 backgroundColor: appBarColor,
               ),
               body: const Center(
