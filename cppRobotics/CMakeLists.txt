@@ -13,6 +13,8 @@ set(CPP_ROBOTICS_SRCS
 set(CPP_ROBOTICS_EXTERNS
   extern/filter/HighPassFilter.cpp
   extern/filter/LowPassFilter.cpp
+
+  extern/guidance/PureProportionalNavigation.cpp
 )
 
 add_library(cpp_robotics_library SHARED
