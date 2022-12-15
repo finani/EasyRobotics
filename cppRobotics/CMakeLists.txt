@@ -45,4 +45,6 @@ set_target_properties(cpp_robotics_library PROPERTIES
     XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Hex_Identity_ID_Goes_Here"
 )
 
-# add_subdirectory(test)
+if(GTEST)
+  add_subdirectory(test)
+endif()
