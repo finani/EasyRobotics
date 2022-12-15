@@ -4,8 +4,8 @@ static ProportionalNavigation proportionalNavigation(50);
 static double pParams[1];
 
 double PureProportionalNavigationCalcAccCmd(double* pCurPos, double* pTargetPos) {
-  std::array<double, 3> curPos = {pCurPos[0], pCurPos[1], pCurPos[2]};
-  std::array<double, 3> targetPos = {pTargetPos[0], pTargetPos[1], pTargetPos[2]};
+  Eigen::Vector3d curPos = {pCurPos[0], pCurPos[1], pCurPos[2]};
+  Eigen::Vector3d targetPos = {pTargetPos[0], pTargetPos[1], pTargetPos[2]};
   PureProportionalNavigationData curInputData = {curPos, targetPos};
   return proportionalNavigation.CalcAccCmd(curInputData);
 }
@@ -26,8 +26,8 @@ void PureProportionalNavigationSetParams(double n) {
 }
 
 void PureProportionalNavigationSetPrevValues(double* pCurPos, double* pTargetPos) {
-  std::array<double, 3> curPos = {pCurPos[0], pCurPos[1], pCurPos[2]};
-  std::array<double, 3> targetPos = {pTargetPos[0], pTargetPos[1], pTargetPos[2]};
+  Eigen::Vector3d curPos = {pCurPos[0], pCurPos[1], pCurPos[2]};
+  Eigen::Vector3d targetPos = {pTargetPos[0], pTargetPos[1], pTargetPos[2]};
   PureProportionalNavigationData prevInputData = {curPos, targetPos};
   proportionalNavigation.SetPrevData(prevInputData);
 }

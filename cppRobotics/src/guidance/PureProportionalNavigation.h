@@ -2,7 +2,6 @@
 #define GUIDANCE_PROPORTIONAL_NAVIGATION_H
 
 #include <cmath>
-#include <eigen3/Eigen/Dense>
 
 #include "IGuidance.h"
 #include "ProportionalNavigationConfig.h"
@@ -28,19 +27,12 @@ public:
   double
   CalcAccCmd(const PureProportionalNavigationData &curInputData) override {
     if (isSetParams_ == true) {
-      std::array<double, 3> curToTargetVector = {
-          curInputData.targetPos[0] - curInputData.curPos[0],
-          curInputData.targetPos[1] - curInputData.curPos[1],
-          curInputData.targetPos[2] - curInputData.curPos[2]};
-      double curToTargetVectorNorm =
-          std::sqrt(curToTargetVector[0] * curToTargetVector[0] +
-                    curToTargetVector[1] * curToTargetVector[1] +
-                    curToTargetVector[2] * curToTargetVector[2]);
+      Eigen::Vector3d curToTargetVector =
+          curInputData.targetPos - curInputData.curPos;
+      double curToTargetVectorNorm = curToTargetVector.norm();
 
       double deltaLos =
-          std::acos((curToTargetVector[0] * prevToTargetVector_[0] +
-                     curToTargetVector[1] * prevToTargetVector_[1] +
-                     curToTargetVector[2] * prevToTargetVector_[2]) /
+          std::acos(curToTargetVector.dot(prevToTargetVector_) /
                     curToTargetVectorNorm / prevToTargetVectorNorm_);
 
       double losRate = deltaLos * hz_;
@@ -95,7 +87,7 @@ private:
 
   ProportionalNavigationConfig proportionalNavigationConfig_;
 
-  std::array<double, 3> prevToTargetVector_;
+  Eigen::Vector3d prevToTargetVector_;
   double prevToTargetVectorNorm_;
 };
 
