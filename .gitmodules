@@ -1,0 +1,3 @@
+[submodule "cppRobotics/3rdParty/eigen"]
+	path = cppRobotics/3rdParty/eigen
+	url = https://gitlab.com/libeigen/eigen.git

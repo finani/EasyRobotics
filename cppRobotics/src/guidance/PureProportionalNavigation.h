@@ -2,6 +2,7 @@
 #define GUIDANCE_PROPORTIONAL_NAVIGATION_H
 
 #include <cmath>
+#include <eigen3/Eigen/Dense>
 
 #include "IGuidance.h"
 #include "ProportionalNavigationConfig.h"
