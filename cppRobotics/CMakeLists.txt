@@ -4,17 +4,21 @@ project(CppRobotics VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 
-# find_package(Eigen3 REQUIRED NO_MODULE)
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+
+set(Eigen3_DIR
+  ${CMAKE_SOURCE_DIR}/3rdParty/eigen/cmake
+)
 
 set(CPP_ROBOTICS_SRCS
-	src/cpp_add.cpp
+  ${CMAKE_SOURCE_DIR}/src/cpp_add.cpp
 )
 
 set(CPP_ROBOTICS_EXTERNS
-  extern/filter/HighPassFilter.cpp
-  extern/filter/LowPassFilter.cpp
+  ${CMAKE_SOURCE_DIR}/extern/filter/HighPassFilter.cpp
+  ${CMAKE_SOURCE_DIR}/extern/filter/LowPassFilter.cpp
 
-  extern/guidance/PureProportionalNavigation.cpp
+  ${CMAKE_SOURCE_DIR}/extern/guidance/PureProportionalNavigation.cpp
 )
 
 add_library(cpp_robotics_library SHARED
@@ -23,10 +27,11 @@ add_library(cpp_robotics_library SHARED
 )
 
 add_executable(cpp_robotics
-  src/main.cpp
+  ${CMAKE_SOURCE_DIR}/src/main.cpp
 )
 
 target_link_libraries(cpp_robotics
+  Eigen3::Eigen
   cpp_robotics_library
 )
 
