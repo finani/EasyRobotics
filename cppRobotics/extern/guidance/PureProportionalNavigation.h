@@ -1,4 +1,4 @@
-#include "guidance/PureProportionalNavigation.h"
+#include "../../src/guidance/PureProportionalNavigation.h"
 
 #if defined(__cplusplus)
 extern "C" {
