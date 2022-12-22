@@ -6,12 +6,6 @@ project(CppRobotics VERSION 1.0.0 LANGUAGES CXX)
 # set(CMAKE_CXX_FLAG -Werror -Wall -Wextra)
 add_compile_options(-std=c++14 -Werror -Wall -Wextra)
 
-find_package (Eigen3 3.3 REQUIRED NO_MODULE)
-
-set(Eigen3_DIR
-  ${CMAKE_SOURCE_DIR}/3rdParty/eigen/cmake
-)
-
 set(CPP_ROBOTICS_SRCS
   ${CMAKE_SOURCE_DIR}/src/cpp_add.cpp
 )
@@ -28,12 +22,15 @@ add_library(cpp_robotics_library SHARED
   ${CPP_ROBOTICS_EXTERNS}
 )
 
+include_directories(
+  ${CMAKE_SOURCE_DIR}/3rdParty/eigen
+)
+
 add_executable(cpp_robotics
   ${CMAKE_SOURCE_DIR}/src/main.cpp
 )
 
 target_link_libraries(cpp_robotics
-  Eigen3::Eigen
   cpp_robotics_library
 )
 
