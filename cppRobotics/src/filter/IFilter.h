@@ -4,7 +4,7 @@
 template <typename T, typename Config> class IFilter {
 public:
   IFilter() = default;
-  ~IFilter() = default;
+  virtual ~IFilter() = default;
 
   virtual T Calc(const T &curInput) = 0;
   virtual T Calc(const T &curInput, const Config &config) = 0;

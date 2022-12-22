@@ -4,7 +4,7 @@
 template <typename InputData, typename Config> class IGuidance {
 public:
   IGuidance() = default;
-  ~IGuidance() = default;
+  virtual ~IGuidance() = default;
 
   virtual double CalcAccCmd(const InputData &curInputData) = 0;
   virtual double CalcAccCmdFromLosRate(double losRate) = 0;
