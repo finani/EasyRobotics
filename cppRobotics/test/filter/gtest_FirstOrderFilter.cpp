@@ -1,4 +1,4 @@
-#include "../../src/filter/LowPassFilter.h"
+#include "filter/LowPassFilter.h"
 #include <gtest/gtest.h>
 #include <unordered_map>
 
