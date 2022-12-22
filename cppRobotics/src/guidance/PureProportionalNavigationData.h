@@ -1,7 +1,7 @@
 #ifndef GUIDANCE_PURE_PROPORTIONAL_NAVIGATION_INPUT_DATA_H
 #define GUIDANCE_PURE_PROPORTIONAL_NAVIGATION_INPUT_DATA_H
 
-#include <Eigen/Dense>
+#include "../../3rdParty/eigen/Eigen/Dense"
 
 struct PureProportionalNavigationData {
   Eigen::Vector3d curPos;

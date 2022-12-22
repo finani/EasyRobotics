@@ -25,11 +25,6 @@ add_library(cpp_robotics_library SHARED
   ${CPP_ROBOTICS_EXTERNS}
 )
 
-include_directories(
-  ${CMAKE_SOURCE_DIR}/3rdParty/eigen
-  ${CMAKE_SOURCE_DIR}/src
-)
-
 add_executable(cpp_robotics
   ${CMAKE_SOURCE_DIR}/src/main.cpp
 )
