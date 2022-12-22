@@ -1,4 +1,4 @@
-#include "../../src/filter/HighPassFilter.h"
+#include "filter/HighPassFilter.h"
 
 #if defined(__cplusplus)
 extern "C" {
