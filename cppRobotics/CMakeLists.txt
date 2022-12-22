@@ -4,7 +4,10 @@ project(CppRobotics VERSION 1.0.0 LANGUAGES CXX)
 
 # set(CMAKE_CXX_STANDARD 14)
 # set(CMAKE_CXX_FLAG -Werror -Wall -Wextra)
-add_compile_options(-std=c++14 -Werror -Wall -Wextra)
+add_compile_options(-std=c++14 -Wall -Wextra)
+if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Android")
+  add_compile_options(-Werror)
+endif()
 
 set(CPP_ROBOTICS_SRCS
   ${CMAKE_SOURCE_DIR}/src/cpp_add.cpp
