@@ -90,6 +90,23 @@ jobs:
           name: ios-build
           path: example/build/ios/iphoneos
 
+  build_macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          architecture: x64
+      - name: Git submodule
+        run: git submodule update --init
+      - run: flutter config --enable-macos-desktop
+      - name: Build MacOS
+        run:  |
+          cd example
+          flutter build macos
+
   build_windows:
     runs-on: windows-latest
     steps:
@@ -125,20 +142,3 @@ jobs:
         run:  |
           cd example
           flutter build linux
-
-  build_macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          architecture: x64
-      - name: Git submodule
-        run: git submodule update --init
-      - run: flutter config --enable-macos-desktop
-      - name: Build MacOS
-        run:  |
-          cd example
-          flutter build macos
