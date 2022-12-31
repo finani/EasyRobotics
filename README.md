@@ -41,38 +41,37 @@ samples, guidance on mobile development, and a full API reference.
     sudo apt install cmake
     ```
 
-2. Install dependencies
+2. Install flutter
 
     ``` bash
-    sudo apt install clang ninja-build libgtk-3-dev
-    ```
-
-3. Install flutter
-
-    ``` bash
-    mkdir development
-    cd development
-    git clone https://github.com/flutter/flutter.git -b stable
-    echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >> ~/.bashrc
-    source ~/.bashrc
+    sudo apt install curl && \
+    mkdir ~/development && \
+    cd ~/development && \
+    git clone https://github.com/flutter/flutter.git -b stable && \
+    echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >> ~/.bashrc && \
+    source ~/.bashrc && \
     flutter precache
     ```
 
-4. Build cppRobotics
+3. Build cppRobotics
 
     ``` bash
-    git clone git@github.com:finani/EasyRobotics.git
-    cd EasyRobotics/cppRobotics
-    mkdir build
-    cd build
-    cmake ..
+    cd ~/development && \
+    git clone git@github.com:finani/EasyRobotics.git && \
+    cd EasyRobotics/cppRobotics && \
+    git submodule update --init && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
     cmake --build .
     ```
 
-5. Run flutter
+4. Run flutter
 
     ``` bash
-    cd EasyRobotics/example
-    flutter doctor -v
+    cd ~/development && \
+    sudo apt install clang ninja-build libgtk-3-dev && \
+    cd EasyRobotics/example && \
+    flutter doctor -v && \
     flutter run -d linux
     ```
