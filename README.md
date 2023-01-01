@@ -46,10 +46,10 @@ samples, guidance on mobile development, and a full API reference.
     ``` bash
     mkdir ~/development && \
       cd ~/development && \
-      sudo apt install curl && \
       git clone https://github.com/flutter/flutter.git -b stable && \
       echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >> ~/.bashrc && \
       source ~/.bashrc && \
+      sudo apt install curl && \
       flutter precache
     ```
 
@@ -70,8 +70,8 @@ samples, guidance on mobile development, and a full API reference.
 
     ``` bash
     cd ~/development && \
-      sudo apt install clang ninja-build libgtk-3-dev && \
       cd EasyRobotics/example && \
+      sudo apt install clang ninja-build libgtk-3-dev && \
       flutter doctor -v && \
       flutter run -d linux
     ```
