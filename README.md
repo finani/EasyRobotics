@@ -44,9 +44,9 @@ samples, guidance on mobile development, and a full API reference.
 2. Install flutter
 
     ``` bash
-    sudo apt install curl && \
-      mkdir ~/development && \
+    mkdir ~/development && \
       cd ~/development && \
+      sudo apt install curl && \
       git clone https://github.com/flutter/flutter.git -b stable && \
       echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >> ~/.bashrc && \
       source ~/.bashrc && \
